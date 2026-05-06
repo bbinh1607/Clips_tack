@@ -242,4 +242,62 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get loginTitle => 'Sign in';
+
+  @override
+  String get loginWelcomeMessage => 'Welcome back to ClipStack';
+
+  @override
+  String get loginEmailLabel => 'Email';
+
+  @override
+  String get loginEmailHint => 'name@example.com';
+
+  @override
+  String get loginPasswordLabel => 'Password';
+
+  @override
+  String get loginPasswordHint => 'Enter your password';
+
+  @override
+  String get loginShowPasswordTooltip => 'Show password';
+
+  @override
+  String get loginHidePasswordTooltip => 'Hide password';
+
+  @override
+  String get loginForgotPasswordButton => 'Forgot password?';
+
+  @override
+  String get loginButton => 'Sign in';
+
+  @override
+  String get loginLoadingButton => 'Signing in...';
+
+  @override
+  String get loginPrivacyNote => 'Keep your personal clipboard data protected.';
+
+  @override
+  String get loginBrandTagline => 'Manage quick notes neatly and safely';
+
+  @override
+  String get loginForgotPasswordUnavailable =>
+      'Password recovery will be available soon';
+
+  @override
+  String get loginEmailRequired => 'Please enter your email';
+
+  @override
+  String get loginEmailInvalid => 'Please enter a valid email';
+
+  @override
+  String get loginPasswordRequired => 'Please enter your password';
+
+  @override
+  String get loginPasswordTooShort => 'Password must be at least 6 characters';
+
+  @override
+  String get textOr => 'Or';
 }

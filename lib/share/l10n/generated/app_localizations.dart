@@ -457,6 +457,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =1{1 week ago} other{{count} weeks ago}}'**
   String weeksAgo(int count);
+
+  /// No description provided for @loginTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get loginTitle;
+
+  /// No description provided for @loginWelcomeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back to ClipStack'**
+  String get loginWelcomeMessage;
+
+  /// No description provided for @loginEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get loginEmailLabel;
+
+  /// No description provided for @loginEmailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'name@example.com'**
+  String get loginEmailHint;
+
+  /// No description provided for @loginPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get loginPasswordLabel;
+
+  /// No description provided for @loginPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get loginPasswordHint;
+
+  /// No description provided for @loginShowPasswordTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get loginShowPasswordTooltip;
+
+  /// No description provided for @loginHidePasswordTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get loginHidePasswordTooltip;
+
+  /// No description provided for @loginForgotPasswordButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get loginForgotPasswordButton;
+
+  /// No description provided for @loginButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get loginButton;
+
+  /// No description provided for @loginLoadingButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing in...'**
+  String get loginLoadingButton;
+
+  /// No description provided for @loginPrivacyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your personal clipboard data protected.'**
+  String get loginPrivacyNote;
+
+  /// No description provided for @loginBrandTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage quick notes neatly and safely'**
+  String get loginBrandTagline;
+
+  /// No description provided for @loginForgotPasswordUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Password recovery will be available soon'**
+  String get loginForgotPasswordUnavailable;
+
+  /// No description provided for @loginEmailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email'**
+  String get loginEmailRequired;
+
+  /// No description provided for @loginEmailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get loginEmailInvalid;
+
+  /// No description provided for @loginPasswordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password'**
+  String get loginPasswordRequired;
+
+  /// No description provided for @loginPasswordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get loginPasswordTooShort;
+
+  /// No description provided for @textOr.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get textOr;
 }
 
 class _AppLocalizationsDelegate

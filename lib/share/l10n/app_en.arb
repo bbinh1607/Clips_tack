@@ -117,5 +117,24 @@
         "type": "int"
       }
     }
-  }
+  },
+  "loginTitle": "Sign in",
+  "loginWelcomeMessage": "Welcome back to ClipStack",
+  "loginEmailLabel": "Email",
+  "loginEmailHint": "name@example.com",
+  "loginPasswordLabel": "Password",
+  "loginPasswordHint": "Enter your password",
+  "loginShowPasswordTooltip": "Show password",
+  "loginHidePasswordTooltip": "Hide password",
+  "loginForgotPasswordButton": "Forgot password?",
+  "loginButton": "Sign in",
+  "loginLoadingButton": "Signing in...",
+  "loginPrivacyNote": "Keep your personal clipboard data protected.",
+  "loginBrandTagline": "Manage quick notes neatly and safely",
+  "loginForgotPasswordUnavailable": "Password recovery will be available soon",
+  "loginEmailRequired": "Please enter your email",
+  "loginEmailInvalid": "Please enter a valid email",
+  "loginPasswordRequired": "Please enter your password",
+  "loginPasswordTooShort": "Password must be at least 6 characters",
+  "textOr": "Or"
 }

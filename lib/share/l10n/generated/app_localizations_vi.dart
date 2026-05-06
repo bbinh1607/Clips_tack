@@ -243,4 +243,62 @@ class AppLocalizationsVi extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get loginTitle => 'Đăng nhập';
+
+  @override
+  String get loginWelcomeMessage => 'Chào mừng bạn quay lại với ClipStack';
+
+  @override
+  String get loginEmailLabel => 'Email';
+
+  @override
+  String get loginEmailHint => 'name@example.com';
+
+  @override
+  String get loginPasswordLabel => 'Mật khẩu';
+
+  @override
+  String get loginPasswordHint => 'Nhập mật khẩu của bạn';
+
+  @override
+  String get loginShowPasswordTooltip => 'Hiện mật khẩu';
+
+  @override
+  String get loginHidePasswordTooltip => 'Ẩn mật khẩu';
+
+  @override
+  String get loginForgotPasswordButton => 'Quên mật khẩu?';
+
+  @override
+  String get loginButton => 'Đăng nhập';
+
+  @override
+  String get loginLoadingButton => 'Đang đăng nhập...';
+
+  @override
+  String get loginPrivacyNote => 'Bảo vệ dữ liệu clipboard cá nhân của bạn.';
+
+  @override
+  String get loginBrandTagline => 'Quản lý ghi chú nhanh gọn, an toàn';
+
+  @override
+  String get loginForgotPasswordUnavailable =>
+      'Tính năng khôi phục mật khẩu sẽ được cập nhật sau';
+
+  @override
+  String get loginEmailRequired => 'Vui lòng nhập email';
+
+  @override
+  String get loginEmailInvalid => 'Email chưa đúng định dạng';
+
+  @override
+  String get loginPasswordRequired => 'Vui lòng nhập mật khẩu';
+
+  @override
+  String get loginPasswordTooShort => 'Mật khẩu tối thiểu 6 ký tự';
+
+  @override
+  String get textOr => 'Hoặc';
 }

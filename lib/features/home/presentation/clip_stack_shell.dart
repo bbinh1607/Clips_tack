@@ -29,7 +29,7 @@ class _ClipStackShellState extends State<ClipStackShell> {
     }
 
     final message = await context.pushNamed<String>(
-      AppRoutes.editorName,
+      AppRoutes.editor,
       extra: ClipEditorPayload(initialContent: draft ?? ''),
     );
 

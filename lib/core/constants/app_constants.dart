@@ -103,7 +103,7 @@ abstract final class AppRadius {
 abstract final class AppSize {
   static const double iconSmall = 14;
   static const double iconMedium = 18;
-  static const double iconLarge = 46;
+  static const double iconLarge = 36;
   static const double emptyStateIcon = 50;
   static const double iconContainer = 44;
   static const double iconButton = 44;

@@ -117,5 +117,24 @@
         "type": "int"
       }
     }
-  }
+  },
+  "loginTitle": "Đăng nhập",
+  "loginWelcomeMessage": "Chào mừng bạn quay lại với ClipStack",
+  "loginEmailLabel": "Email",
+  "loginEmailHint": "name@example.com",
+  "loginPasswordLabel": "Mật khẩu",
+  "loginPasswordHint": "Nhập mật khẩu của bạn",
+  "loginShowPasswordTooltip": "Hiện mật khẩu",
+  "loginHidePasswordTooltip": "Ẩn mật khẩu",
+  "loginForgotPasswordButton": "Quên mật khẩu?",
+  "loginButton": "Đăng nhập",
+  "loginLoadingButton": "Đang đăng nhập...",
+  "loginPrivacyNote": "Bảo vệ dữ liệu clipboard cá nhân của bạn.",
+  "loginBrandTagline": "Quản lý ghi chú nhanh gọn, an toàn",
+  "loginForgotPasswordUnavailable": "Tính năng khôi phục mật khẩu sẽ được cập nhật sau",
+  "loginEmailRequired": "Vui lòng nhập email",
+  "loginEmailInvalid": "Email chưa đúng định dạng",
+  "loginPasswordRequired": "Vui lòng nhập mật khẩu",
+  "loginPasswordTooShort": "Mật khẩu tối thiểu 6 ký tự",
+  "textOr": "Hoặc"
 }

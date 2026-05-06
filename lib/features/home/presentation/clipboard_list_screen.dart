@@ -141,7 +141,7 @@ class _ClipboardListScreenState extends State<ClipboardListScreen> {
         _showSnackBar(context.l10n.deletedMessage);
       case _ClipboardItemAction.edit:
         final message = await context.pushNamed<String>(
-          AppRoutes.editorName,
+          AppRoutes.editor,
           extra: ClipEditorPayload(
             clipId: item.id,
             initialContent: item.content,
@@ -180,9 +180,8 @@ class _ClipboardListScreenState extends State<ClipboardListScreen> {
           final l10n = context.l10n;
           final source = _pinnedOnly ? state.pinnedItems : state.items;
           final visibleItems = state.visibleItems(pinnedOnly: _pinnedOnly);
-          final label = _pinnedOnly
-              ? l10n.pinnedSnippetsTitle
-              : l10n.recentSnippetsTitle;
+          final label =
+              _pinnedOnly ? l10n.pinnedSnippetsTitle : l10n.recentSnippetsTitle;
           final helper = _pinnedOnly
               ? l10n.pinnedSnippetsHelper
               : l10n.recentSnippetsHelper;
@@ -264,10 +263,10 @@ class _ClipboardListScreenState extends State<ClipboardListScreen> {
     final l10n = context.l10n;
 
     if (allItemsEmpty) {
-      return Padding(
-        key: const ValueKey('empty-history'),
+      return const Padding(
+        key: ValueKey('empty-history'),
         padding: AppInsets.listWithFab,
-        child: const _EmptyStateCard(),
+        child: _EmptyStateCard(),
       );
     }
 
@@ -300,9 +299,8 @@ class _ClipboardListScreenState extends State<ClipboardListScreen> {
     }
 
     if (visibleItems.isEmpty) {
-      final message = hasSearchQuery
-          ? l10n.noSearchResultsMessage
-          : l10n.pinClipPrompt;
+      final message =
+          hasSearchQuery ? l10n.noSearchResultsMessage : l10n.pinClipPrompt;
 
       return Center(
         key: const ValueKey('no-results'),
@@ -340,7 +338,7 @@ class _ClipboardListScreenState extends State<ClipboardListScreen> {
           onLongPress: () => _showItemActions(item),
         );
       },
-      separatorBuilder: (_, _) => const SizedBox(height: AppSpace.lg),
+      separatorBuilder: (_, __) => const SizedBox(height: AppSpace.lg),
       itemCount: visibleItems.length,
     );
   }

@@ -3,6 +3,11 @@ import 'package:clips_tack/app/cubit/app_settings_state.dart';
 import 'package:clips_tack/core/di/injection.dart';
 import 'package:clips_tack/core/extensions/context_ext.dart';
 import 'package:clips_tack/core/theme/app_theme.dart';
+import 'package:clips_tack/features/auth/domain/usecases/auth_check_login_usecase.dart';
+import 'package:clips_tack/features/auth/domain/usecases/auth_login_usecase.dart';
+import 'package:clips_tack/features/auth/domain/usecases/auth_logout_usecase.dart';
+import 'package:clips_tack/features/auth/domain/usecases/auth_register_usecase.dart';
+import 'package:clips_tack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:clips_tack/features/clipboard/cubit/clipboard_cubit.dart';
 import 'package:clips_tack/share/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +25,14 @@ class ClipStackApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => getIt<AppSettingsCubit>()),
         BlocProvider(create: (_) => getIt<ClipboardCubit>()),
+        BlocProvider(
+          create: (_) => AuthBloc(
+            getIt<AuthLoginUseCase>(),
+            getIt<AuthRegisterUseCase>(),
+            getIt<AuthLogoutUseCase>(),
+            getIt<AuthCheckLoginUseCase>(),
+          )..add(const AuthEvent.checkLogin()),
+        ),
       ],
       child: BlocBuilder<AppSettingsCubit, AppSettingsState>(
         builder: (context, settingsState) {
