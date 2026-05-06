@@ -1,0 +1,121 @@
+{
+  "appName": "ClipStack",
+  "settingsTitle": "Cài đặt",
+  "settingsTooltip": "Cài đặt",
+  "saveClipTooltip": "Lưu đoạn sao chép",
+  "historyTab": "Lịch sử",
+  "starredTab": "Đã ghim",
+  "drawerDescription": "Những đoạn bạn sao chép được sắp xếp gọn gàng và sẵn sàng để dùng lại.",
+  "savedPinnedSummary": "{savedCount} mục đã lưu | {pinnedCount} mục đã ghim",
+  "@savedPinnedSummary": {
+    "placeholders": {
+      "savedCount": {
+        "type": "int"
+      },
+      "pinnedCount": {
+        "type": "int"
+      }
+    }
+  },
+  "searchClipboardPlaceholder": "Tìm trong clipboard...",
+  "clearSearchTooltip": "Xóa tìm kiếm",
+  "recentSnippetsTitle": "Đoạn mới gần đây",
+  "recentSnippetsHelper": "Chạm để sao chép nhanh, nhấn giữ để mở thêm thao tác.",
+  "pinnedSnippetsTitle": "Đoạn đã ghim",
+  "pinnedSnippetsHelper": "Những mục đã ghim luôn ở trên cùng để dùng lại nhanh hơn.",
+  "itemCount": "{count, plural, =1{1 mục} other{{count} mục}}",
+  "@itemCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "copiedMessage": "Đã sao chép",
+  "copyAction": "Sao chép",
+  "pinAction": "Ghim",
+  "unpinAction": "Bỏ ghim",
+  "pinnedMessage": "Đã ghim",
+  "unpinnedMessage": "Đã bỏ ghim",
+  "editAction": "Chỉnh sửa",
+  "deleteAction": "Xóa",
+  "deletedMessage": "Đã xóa",
+  "savedMessage": "Đã lưu",
+  "updatedMessage": "Đã cập nhật",
+  "duplicateClipMessage": "Nội dung này đã có trong danh sách của bạn",
+  "saveClipTitle": "Lưu đoạn sao chép",
+  "editClipTitle": "Chỉnh sửa đoạn sao chép",
+  "saveClipButton": "Lưu đoạn sao chép",
+  "updateClipButton": "Cập nhật đoạn sao chép",
+  "editorCreateDescription": "Lưu nội dung đang có trong clipboard hoặc viết một đoạn mới.",
+  "editorEditDescription": "Điều chỉnh đoạn nội dung và giữ nó sẵn sàng để dùng lại.",
+  "editorHint": "Dán hoặc nhập nội dung tại đây",
+  "settingsIntro": "Tùy chỉnh trải nghiệm và giữ việc theo dõi clipboard hoạt động mượt mà.",
+  "appearanceTitle": "Giao diện",
+  "darkModeTitle": "Chế độ tối",
+  "darkModeSubtitle": "Chuyển đổi giữa giao diện sáng và tối.",
+  "languageTitle": "Ngôn ngữ",
+  "languageEnglish": "Tiếng Anh",
+  "languageVietnamese": "Tiếng Việt",
+  "clipboardSectionTitle": "Clipboard",
+  "autoTrackingTitle": "Tự động theo dõi",
+  "autoTrackingSubtitle": "Bật khi ứng dụng đang mở",
+  "savedSnippetsTitle": "Đoạn đã lưu",
+  "savedSnippetsSubtitle": "{count} mục trong lịch sử của bạn",
+  "@savedSnippetsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pinnedSnippetsSubtitle": "{count} mục sẵn sàng ở trên cùng",
+  "@pinnedSnippetsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duplicateProtectionTitle": "Chống trùng lặp",
+  "duplicateProtectionSubtitle": "Nội dung lặp lại sẽ được bỏ qua tự động",
+  "emptyClipboardDescription": "Những mục bạn sao chép sẽ xuất hiện ở đây dưới dạng các đoạn nội dung đã được chọn lọc.",
+  "pinClipPrompt": "Hãy ghim một mục để luôn giữ nó ở gần bạn.",
+  "noSearchResultsMessage": "Chưa có mục nào khớp với tìm kiếm của bạn.",
+  "linkChip": "Liên kết",
+  "phoneChip": "Số điện thoại",
+  "pinnedChip": "Đã ghim",
+  "justNow": "Vừa xong",
+  "minutesAgo": "{count, plural, =1{1 phút trước} other{{count} phút trước}}",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hoursAgo": "{count, plural, =1{1 giờ trước} other{{count} giờ trước}}",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "daysAgo": "{count, plural, =1{1 ngày trước} other{{count} ngày trước}}",
+  "@daysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "weeksAgo": "{count, plural, =1{1 tuần trước} other{{count} tuần trước}}",
+  "@weeksAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}

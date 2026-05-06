@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "674072528546",
+    "project_id": "clips-tack",
+    "storage_bucket": "clips-tack.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674072528546:android:942761b8ba5fe04f3b39fb",
+        "android_client_info": {
+          "package_name": "com.example.clips_tack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKsr0JOg_EQf0WCNAkIlfGUVlPuTSaDO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

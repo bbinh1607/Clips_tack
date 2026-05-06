@@ -1,0 +1,121 @@
+{
+  "appName": "ClipStack",
+  "settingsTitle": "Settings",
+  "settingsTooltip": "Settings",
+  "saveClipTooltip": "Save Clip",
+  "historyTab": "History",
+  "starredTab": "Starred",
+  "drawerDescription": "Your copied snippets stay organized and ready to reuse.",
+  "savedPinnedSummary": "{savedCount} saved | {pinnedCount} pinned",
+  "@savedPinnedSummary": {
+    "placeholders": {
+      "savedCount": {
+        "type": "int"
+      },
+      "pinnedCount": {
+        "type": "int"
+      }
+    }
+  },
+  "searchClipboardPlaceholder": "Search clipboard...",
+  "clearSearchTooltip": "Clear search",
+  "recentSnippetsTitle": "Recent snippets",
+  "recentSnippetsHelper": "Tap to copy instantly, or long press for more actions.",
+  "pinnedSnippetsTitle": "Pinned snippets",
+  "pinnedSnippetsHelper": "Your starred clips stay at the top for quick reuse.",
+  "itemCount": "{count, plural, =1{1 item} other{{count} items}}",
+  "@itemCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "copiedMessage": "Copied",
+  "copyAction": "Copy",
+  "pinAction": "Pin",
+  "unpinAction": "Unpin",
+  "pinnedMessage": "Pinned",
+  "unpinnedMessage": "Unpinned",
+  "editAction": "Edit",
+  "deleteAction": "Delete",
+  "deletedMessage": "Deleted",
+  "savedMessage": "Saved",
+  "updatedMessage": "Updated",
+  "duplicateClipMessage": "That clip is already in your stack",
+  "saveClipTitle": "Save Clip",
+  "editClipTitle": "Edit Clip",
+  "saveClipButton": "Save Clip",
+  "updateClipButton": "Update Clip",
+  "editorCreateDescription": "Save the current clipboard text or write a new snippet.",
+  "editorEditDescription": "Refine the snippet and keep it ready to reuse.",
+  "editorHint": "Paste or type text here",
+  "settingsIntro": "Tune the experience and keep clipboard capture running smoothly.",
+  "appearanceTitle": "Appearance",
+  "darkModeTitle": "Dark mode",
+  "darkModeSubtitle": "Switch between the light and dark workspace.",
+  "languageTitle": "Language",
+  "languageEnglish": "English",
+  "languageVietnamese": "Vietnamese",
+  "clipboardSectionTitle": "Clipboard",
+  "autoTrackingTitle": "Auto tracking",
+  "autoTrackingSubtitle": "On while the app is open",
+  "savedSnippetsTitle": "Saved snippets",
+  "savedSnippetsSubtitle": "{count} in your history",
+  "@savedSnippetsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pinnedSnippetsSubtitle": "{count} ready at the top",
+  "@pinnedSnippetsSubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duplicateProtectionTitle": "Duplicate protection",
+  "duplicateProtectionSubtitle": "Repeated text is skipped automatically",
+  "emptyClipboardDescription": "Items you copy will appear here as curated snippets.",
+  "pinClipPrompt": "Pin a clip to keep it close.",
+  "noSearchResultsMessage": "No clipboard snippets match your search yet.",
+  "linkChip": "Link",
+  "phoneChip": "Phone",
+  "pinnedChip": "Pinned",
+  "justNow": "Just now",
+  "minutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "hoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "daysAgo": "{count, plural, =1{1 day ago} other{{count} days ago}}",
+  "@daysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "weeksAgo": "{count, plural, =1{1 week ago} other{{count} weeks ago}}",
+  "@weeksAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}
