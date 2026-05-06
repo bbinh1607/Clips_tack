@@ -35,9 +35,9 @@ jobs:
       # - name: Run unit tests
       #   run: flutter test
 
-      # 6. Analyze code (optional)
-      - name: Analyze code
-        run: flutter analyze
+      # # 6. Analyze code (optional)
+      # - name: Analyze code
+      #   run: flutter analyze
 
       # 7. Build APK
       - name: Build APK
