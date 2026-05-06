@@ -1,9 +1,9 @@
-name: Flutter Android CI
+name: Flutter Android CI/CD
 
 on:
   push:
     branches:
-      - main
+      - main   # 👈 CHỈ main
 
 jobs:
   build:
@@ -26,26 +26,29 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          flutter-version: '3.41.9'
 
       # 4. Install dependencies
       - name: Install dependencies
         run: flutter pub get
 
-      # # 5. Run unit tests 👈 THÊM Ở ĐÂY
-      # - name: Run unit tests
+      # 5. Run tests (tuỳ chọn)
+      # - name: Run tests
       #   run: flutter test
 
-      # # 6. Analyze code (optional)
-      # - name: Analyze code
-      #   run: flutter analyze
-
-      # 7. Build APK
+      # 6. Build APK
       - name: Build APK
         run: flutter build apk --release
 
-      # 8. Upload APK artifact
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      # 7. Show APK output (debug)
+      - name: List APK files
+        run: ls build/app/outputs/flutter-apk
+
+      # 8. Upload to Firebase App Distribution
+      - name: Upload to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          name: app-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          appId: ${{ secrets.APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          groups: testers
+          file: build/app/outputs/flutter-apk/app-release.apk
