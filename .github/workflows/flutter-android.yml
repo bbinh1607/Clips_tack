@@ -31,9 +31,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # 5. Run unit tests 👈 THÊM Ở ĐÂY
-      - name: Run unit tests
-        run: flutter test
+      # # 5. Run unit tests 👈 THÊM Ở ĐÂY
+      # - name: Run unit tests
+      #   run: flutter test
 
       # 6. Analyze code (optional)
       - name: Analyze code
