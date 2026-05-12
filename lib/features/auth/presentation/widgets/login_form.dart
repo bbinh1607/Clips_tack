@@ -4,7 +4,6 @@ import 'package:clips_tack/core/extensions/context_ext.dart';
 import 'package:clips_tack/core/widgets/app_button.dart';
 import 'package:clips_tack/core/widgets/app_text.dart';
 import 'package:clips_tack/features/auth/presentation/widgets/login_brand.dart';
-import 'package:clips_tack/features/auth/presentation/widgets/login_icon.dart';
 import 'package:clips_tack/features/auth/presentation/widgets/login_panel.dart';
 import 'package:clips_tack/features/auth/presentation/widgets/login_text_field.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +16,8 @@ class LoginForm extends StatelessWidget {
     required this.obscurePassword,
     required this.isLoading,
     required this.onLogin,
+    required this.onLoginWithGoogle,
+    required this.onRegister,
     required this.onForgotPassword,
     required this.onTogglePasswordVisibility,
     required this.validateEmail,
@@ -30,6 +31,8 @@ class LoginForm extends StatelessWidget {
   final bool obscurePassword;
   final bool isLoading;
   final VoidCallback onLogin;
+  final VoidCallback onLoginWithGoogle;
+  final VoidCallback onRegister;
   final VoidCallback onForgotPassword;
   final VoidCallback onTogglePasswordVisibility;
   final FormFieldValidator<String> validateEmail;
@@ -118,49 +121,25 @@ class LoginForm extends StatelessWidget {
                   onPressed: isLoading ? null : onLogin,
                 ),
                 const SizedBox(height: AppSpace.xxl),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        color: Color.lerp(
-                          context.colors.onSurface,
-                          context.colors.surface,
-                          AppOpacity.inputFillDark,
-                        ),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpace.xxs,
-                      ),
-                      child: AppText.bodySmall(
-                        l10n.textOr,
-                        color: Color.lerp(
-                          context.colors.onSurface,
-                          context.colors.surface,
-                          AppOpacity.inputFillDark,
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      child: Divider(
-                        color: Color.lerp(
-                          context.colors.onSurface,
-                          context.colors.surface,
-                          AppOpacity.inputFillDark,
-                        ),
-                      ),
-                    ),
-                  ],
+                _DividerLabel(label: l10n.textOr),
+                const SizedBox(height: AppSpace.xxl),
+                _GoogleSignInButton(
+                  label: l10n.loginGoogleButton,
+                  onPressed: isLoading ? null : onLoginWithGoogle,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Row(
-                    mainAxisAlignment: .spaceAround,
-                    children: [LoginIcon(icon: AppSvg.iconGoogle)],
+                const SizedBox(height: AppSpace.xxl),
+                Divider(
+                  color: Color.lerp(
+                    context.colors.onSurface,
+                    context.colors.surface,
+                    AppOpacity.inputFillDark,
                   ),
+                ),
+                const SizedBox(height: AppSpace.lg),
+                _RegisterPrompt(
+                  prompt: l10n.loginRegisterPrompt,
+                  actionLabel: l10n.loginRegisterAction,
+                  onPressed: isLoading ? null : onRegister,
                 ),
               ],
             ),
@@ -177,6 +156,118 @@ class LoginForm extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _DividerLabel extends StatelessWidget {
+  const _DividerLabel({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final dividerColor = Color.lerp(
+      context.colors.onSurface,
+      context.colors.surface,
+      AppOpacity.inputFillDark,
+    );
+
+    return Row(
+      children: [
+        Expanded(child: Divider(color: dividerColor)),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpace.lg),
+          child: AppText.bodySmall(
+            label,
+            color: Color.lerp(
+              context.colors.onSurface,
+              context.colors.surface,
+              AppOpacity.mutedText,
+            ),
+          ),
+        ),
+        Expanded(child: Divider(color: dividerColor)),
+      ],
+    );
+  }
+}
+
+class _GoogleSignInButton extends StatelessWidget {
+  const _GoogleSignInButton({required this.label, required this.onPressed});
+
+  final String label;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: onPressed,
+      style: const ButtonStyle(
+        minimumSize: WidgetStatePropertyAll(
+          Size(0, AppSize.primaryButtonHeight),
+        ),
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.symmetric(horizontal: AppSpace.xxl),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const AppSvgImage(
+            asset: AppSvg.iconGoogle,
+            width: AppSize.iconMedium,
+            height: AppSize.iconMedium,
+          ),
+          const SizedBox(width: AppSpace.lg),
+          Flexible(
+            child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RegisterPrompt extends StatelessWidget {
+  const _RegisterPrompt({
+    required this.prompt,
+    required this.actionLabel,
+    required this.onPressed,
+  });
+
+  final String prompt;
+  final String actionLabel;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: AppSpace.xs,
+      children: [
+        AppText.bodySmall(
+          prompt,
+          color: Color.lerp(
+            context.colors.onSurface,
+            context.colors.surface,
+            AppOpacity.mutedText,
+          ),
+        ),
+        TextButton(
+          onPressed: onPressed,
+          style: TextButton.styleFrom(
+            minimumSize: Size.zero,
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpace.md,
+              vertical: AppSpace.sm,
+            ),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          child: Text(actionLabel),
+        ),
+      ],
     );
   }
 }

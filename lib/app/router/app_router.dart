@@ -1,5 +1,6 @@
 import 'package:clips_tack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:clips_tack/features/auth/presentation/screen/login_scren.dart';
+import 'package:clips_tack/features/auth/presentation/screen/register_screen.dart';
 import 'package:clips_tack/features/home/models/clip_editor_payload.dart';
 import 'package:clips_tack/features/home/presentation/clip_editor_screen.dart';
 import 'package:clips_tack/features/home/presentation/clip_stack_shell.dart';
@@ -11,6 +12,7 @@ import 'package:go_router/go_router.dart';
 
 abstract final class AppRoutes {
   static const login = '/login';
+  static const register = '/register';
   static const history = '/history';
   static const starred = '/starred';
   static const settings = '/settings';
@@ -26,6 +28,13 @@ GoRouter createAppRouter() {
         name: AppRoutes.login,
         pageBuilder: (context, state) {
           return const NoTransitionPage(child: LoginScreen());
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.register,
+        name: AppRoutes.register,
+        pageBuilder: (context, state) {
+          return const NoTransitionPage(child: RegisterScreen());
         },
       ),
       StatefulShellRoute.indexedStack(

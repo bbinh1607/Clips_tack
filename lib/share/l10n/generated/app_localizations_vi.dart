@@ -251,10 +251,10 @@ class AppLocalizationsVi extends AppLocalizations {
   String get loginWelcomeMessage => 'Chào mừng bạn quay lại với ClipStack';
 
   @override
-  String get loginEmailLabel => 'Email';
+  String get loginEmailLabel => 'Gmail';
 
   @override
-  String get loginEmailHint => 'name@example.com';
+  String get loginEmailHint => 'ten@gmail.com';
 
   @override
   String get loginPasswordLabel => 'Mật khẩu';
@@ -272,10 +272,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get loginForgotPasswordButton => 'Quên mật khẩu?';
 
   @override
-  String get loginButton => 'Đăng nhập';
+  String get loginButton => 'Đăng nhập bằng Gmail';
 
   @override
   String get loginLoadingButton => 'Đang đăng nhập...';
+
+  @override
+  String get loginGoogleButton => 'Tiếp tục với Google';
 
   @override
   String get loginPrivacyNote => 'Bảo vệ dữ liệu clipboard cá nhân của bạn.';
@@ -288,16 +291,61 @@ class AppLocalizationsVi extends AppLocalizations {
       'Tính năng khôi phục mật khẩu sẽ được cập nhật sau';
 
   @override
-  String get loginEmailRequired => 'Vui lòng nhập email';
+  String get loginEmailRequired => 'Vui lòng nhập Gmail';
 
   @override
-  String get loginEmailInvalid => 'Email chưa đúng định dạng';
+  String get loginEmailInvalid => 'Vui lòng nhập địa chỉ Gmail hợp lệ';
 
   @override
   String get loginPasswordRequired => 'Vui lòng nhập mật khẩu';
 
   @override
   String get loginPasswordTooShort => 'Mật khẩu tối thiểu 6 ký tự';
+
+  @override
+  String get loginRegisterPrompt => 'Chưa có tài khoản?';
+
+  @override
+  String get loginRegisterAction => 'Đăng ký ngay';
+
+  @override
+  String get registerTitle => 'Đăng ký';
+
+  @override
+  String get registerWelcomeMessage => 'Đăng ký bằng Gmail để bắt đầu lưu clip';
+
+  @override
+  String get registerNameLabel => 'Họ tên';
+
+  @override
+  String get registerNameHint => 'Tên của bạn';
+
+  @override
+  String get registerNameRequired => 'Vui lòng nhập họ tên';
+
+  @override
+  String get registerNameTooShort => 'Tên tối thiểu 2 ký tự';
+
+  @override
+  String get registerConfirmPasswordLabel => 'Xác nhận mật khẩu';
+
+  @override
+  String get registerConfirmPasswordHint => 'Nhập lại mật khẩu';
+
+  @override
+  String get registerConfirmPasswordRequired => 'Vui lòng xác nhận mật khẩu';
+
+  @override
+  String get registerPasswordsDoNotMatch => 'Mật khẩu không khớp';
+
+  @override
+  String get registerButton => 'Đăng ký bằng Gmail';
+
+  @override
+  String get registerLoadingButton => 'Đang tạo tài khoản...';
+
+  @override
+  String get registerGoToLoginButton => 'Đã có tài khoản? Đăng nhập';
 
   @override
   String get textOr => 'Hoặc';

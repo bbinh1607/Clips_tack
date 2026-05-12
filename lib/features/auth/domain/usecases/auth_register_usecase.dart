@@ -10,7 +10,13 @@ class AuthRegisterUseCase implements UseCase<UserEntity, AuthRegisterParams> {
   AuthRegisterUseCase(this.repository);
   @override
   DataState<UserEntity> call(params) {
-    return repository.register(params.email, params.password);
+    return repository.register(
+      params.email,
+      params.password,
+      name: params.name,
+      avatarUrl: params.avatarUrl,
+      username: params.username,
+    );
   }
 }
 

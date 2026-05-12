@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'failure.dart';
 
 // Custom exception cho lỗi API
@@ -30,6 +31,24 @@ class ErrorHandler {
           return Failure.auth('Invalid email');
         default:
           return Failure.auth(error.message ?? 'Auth error');
+      }
+    }
+
+    if (error is GoogleSignInException) {
+      switch (error.code) {
+        case GoogleSignInExceptionCode.canceled:
+          return Failure.auth('Google sign-in was canceled');
+        case GoogleSignInExceptionCode.clientConfigurationError:
+        case GoogleSignInExceptionCode.providerConfigurationError:
+          return Failure.auth(
+            error.description ?? 'Google sign-in is not configured',
+          );
+        case GoogleSignInExceptionCode.uiUnavailable:
+          return Failure.auth(
+            'Google sign-in is not available on this platform',
+          );
+        default:
+          return Failure.auth(error.description ?? 'Google sign-in failed');
       }
     }
 

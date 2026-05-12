@@ -473,13 +473,13 @@ abstract class AppLocalizations {
   /// No description provided for @loginEmailLabel.
   ///
   /// In en, this message translates to:
-  /// **'Email'**
+  /// **'Gmail'**
   String get loginEmailLabel;
 
   /// No description provided for @loginEmailHint.
   ///
   /// In en, this message translates to:
-  /// **'name@example.com'**
+  /// **'name@gmail.com'**
   String get loginEmailHint;
 
   /// No description provided for @loginPasswordLabel.
@@ -515,7 +515,7 @@ abstract class AppLocalizations {
   /// No description provided for @loginButton.
   ///
   /// In en, this message translates to:
-  /// **'Sign in'**
+  /// **'Sign in with Gmail'**
   String get loginButton;
 
   /// No description provided for @loginLoadingButton.
@@ -523,6 +523,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Signing in...'**
   String get loginLoadingButton;
+
+  /// No description provided for @loginGoogleButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get loginGoogleButton;
 
   /// No description provided for @loginPrivacyNote.
   ///
@@ -545,13 +551,13 @@ abstract class AppLocalizations {
   /// No description provided for @loginEmailRequired.
   ///
   /// In en, this message translates to:
-  /// **'Please enter your email'**
+  /// **'Please enter your Gmail'**
   String get loginEmailRequired;
 
   /// No description provided for @loginEmailInvalid.
   ///
   /// In en, this message translates to:
-  /// **'Please enter a valid email'**
+  /// **'Please enter a valid Gmail address'**
   String get loginEmailInvalid;
 
   /// No description provided for @loginPasswordRequired.
@@ -565,6 +571,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password must be at least 6 characters'**
   String get loginPasswordTooShort;
+
+  /// No description provided for @loginRegisterPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get loginRegisterPrompt;
+
+  /// No description provided for @loginRegisterAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Register now'**
+  String get loginRegisterAction;
+
+  /// No description provided for @registerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get registerTitle;
+
+  /// No description provided for @registerWelcomeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Register with your Gmail to start saving clips'**
+  String get registerWelcomeMessage;
+
+  /// No description provided for @registerNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get registerNameLabel;
+
+  /// No description provided for @registerNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get registerNameHint;
+
+  /// No description provided for @registerNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your name'**
+  String get registerNameRequired;
+
+  /// No description provided for @registerNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be at least 2 characters'**
+  String get registerNameTooShort;
+
+  /// No description provided for @registerConfirmPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get registerConfirmPasswordLabel;
+
+  /// No description provided for @registerConfirmPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password again'**
+  String get registerConfirmPasswordHint;
+
+  /// No description provided for @registerConfirmPasswordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm your password'**
+  String get registerConfirmPasswordRequired;
+
+  /// No description provided for @registerPasswordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get registerPasswordsDoNotMatch;
+
+  /// No description provided for @registerButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Register with Gmail'**
+  String get registerButton;
+
+  /// No description provided for @registerLoadingButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating account...'**
+  String get registerLoadingButton;
+
+  /// No description provided for @registerGoToLoginButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Sign in'**
+  String get registerGoToLoginButton;
 
   /// No description provided for @textOr.
   ///

@@ -250,10 +250,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginWelcomeMessage => 'Welcome back to ClipStack';
 
   @override
-  String get loginEmailLabel => 'Email';
+  String get loginEmailLabel => 'Gmail';
 
   @override
-  String get loginEmailHint => 'name@example.com';
+  String get loginEmailHint => 'name@gmail.com';
 
   @override
   String get loginPasswordLabel => 'Password';
@@ -271,10 +271,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginForgotPasswordButton => 'Forgot password?';
 
   @override
-  String get loginButton => 'Sign in';
+  String get loginButton => 'Sign in with Gmail';
 
   @override
   String get loginLoadingButton => 'Signing in...';
+
+  @override
+  String get loginGoogleButton => 'Continue with Google';
 
   @override
   String get loginPrivacyNote => 'Keep your personal clipboard data protected.';
@@ -287,16 +290,62 @@ class AppLocalizationsEn extends AppLocalizations {
       'Password recovery will be available soon';
 
   @override
-  String get loginEmailRequired => 'Please enter your email';
+  String get loginEmailRequired => 'Please enter your Gmail';
 
   @override
-  String get loginEmailInvalid => 'Please enter a valid email';
+  String get loginEmailInvalid => 'Please enter a valid Gmail address';
 
   @override
   String get loginPasswordRequired => 'Please enter your password';
 
   @override
   String get loginPasswordTooShort => 'Password must be at least 6 characters';
+
+  @override
+  String get loginRegisterPrompt => 'Don\'t have an account?';
+
+  @override
+  String get loginRegisterAction => 'Register now';
+
+  @override
+  String get registerTitle => 'Create account';
+
+  @override
+  String get registerWelcomeMessage =>
+      'Register with your Gmail to start saving clips';
+
+  @override
+  String get registerNameLabel => 'Full name';
+
+  @override
+  String get registerNameHint => 'Your name';
+
+  @override
+  String get registerNameRequired => 'Please enter your name';
+
+  @override
+  String get registerNameTooShort => 'Name must be at least 2 characters';
+
+  @override
+  String get registerConfirmPasswordLabel => 'Confirm password';
+
+  @override
+  String get registerConfirmPasswordHint => 'Enter your password again';
+
+  @override
+  String get registerConfirmPasswordRequired => 'Please confirm your password';
+
+  @override
+  String get registerPasswordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get registerButton => 'Register with Gmail';
+
+  @override
+  String get registerLoadingButton => 'Creating account...';
+
+  @override
+  String get registerGoToLoginButton => 'Already have an account? Sign in';
 
   @override
   String get textOr => 'Or';

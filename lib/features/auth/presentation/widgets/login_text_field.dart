@@ -3,7 +3,8 @@ import 'package:clips_tack/core/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
 class LoginTextField extends StatelessWidget {
-  const LoginTextField({super.key, 
+  const LoginTextField({
+    super.key,
     required this.controller,
     required this.label,
     required this.hintText,

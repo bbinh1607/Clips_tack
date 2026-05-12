@@ -55,11 +55,12 @@ extension AuthEventPatterns on AuthEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Login value)?  login,TResult Function( _Logout value)?  logout,TResult Function( _CheckLogin value)?  checkLogin,TResult Function( _Register value)?  register,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Login value)?  login,TResult Function( _LoginWithGoogle value)?  loginWithGoogle,TResult Function( _Logout value)?  logout,TResult Function( _CheckLogin value)?  checkLogin,TResult Function( _Register value)?  register,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Login() when login != null:
-return login(_that);case _Logout() when logout != null:
+return login(_that);case _LoginWithGoogle() when loginWithGoogle != null:
+return loginWithGoogle(_that);case _Logout() when logout != null:
 return logout(_that);case _CheckLogin() when checkLogin != null:
 return checkLogin(_that);case _Register() when register != null:
 return register(_that);case _:
@@ -80,11 +81,12 @@ return register(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Login value)  login,required TResult Function( _Logout value)  logout,required TResult Function( _CheckLogin value)  checkLogin,required TResult Function( _Register value)  register,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Login value)  login,required TResult Function( _LoginWithGoogle value)  loginWithGoogle,required TResult Function( _Logout value)  logout,required TResult Function( _CheckLogin value)  checkLogin,required TResult Function( _Register value)  register,}){
 final _that = this;
 switch (_that) {
 case _Login():
-return login(_that);case _Logout():
+return login(_that);case _LoginWithGoogle():
+return loginWithGoogle(_that);case _Logout():
 return logout(_that);case _CheckLogin():
 return checkLogin(_that);case _Register():
 return register(_that);case _:
@@ -104,11 +106,12 @@ return register(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Login value)?  login,TResult? Function( _Logout value)?  logout,TResult? Function( _CheckLogin value)?  checkLogin,TResult? Function( _Register value)?  register,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Login value)?  login,TResult? Function( _LoginWithGoogle value)?  loginWithGoogle,TResult? Function( _Logout value)?  logout,TResult? Function( _CheckLogin value)?  checkLogin,TResult? Function( _Register value)?  register,}){
 final _that = this;
 switch (_that) {
 case _Login() when login != null:
-return login(_that);case _Logout() when logout != null:
+return login(_that);case _LoginWithGoogle() when loginWithGoogle != null:
+return loginWithGoogle(_that);case _Logout() when logout != null:
 return logout(_that);case _CheckLogin() when checkLogin != null:
 return checkLogin(_that);case _Register() when register != null:
 return register(_that);case _:
@@ -128,10 +131,11 @@ return register(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  login,TResult Function()?  logout,TResult Function()?  checkLogin,TResult Function( String email,  String password,  String? name,  String? avatarUrl,  String? username)?  register,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  login,TResult Function()?  loginWithGoogle,TResult Function()?  logout,TResult Function()?  checkLogin,TResult Function( String email,  String password,  String? name,  String? avatarUrl,  String? username)?  register,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Login() when login != null:
-return login(_that.email,_that.password);case _Logout() when logout != null:
+return login(_that.email,_that.password);case _LoginWithGoogle() when loginWithGoogle != null:
+return loginWithGoogle();case _Logout() when logout != null:
 return logout();case _CheckLogin() when checkLogin != null:
 return checkLogin();case _Register() when register != null:
 return register(_that.email,_that.password,_that.name,_that.avatarUrl,_that.username);case _:
@@ -152,10 +156,11 @@ return register(_that.email,_that.password,_that.name,_that.avatarUrl,_that.user
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  login,required TResult Function()  logout,required TResult Function()  checkLogin,required TResult Function( String email,  String password,  String? name,  String? avatarUrl,  String? username)  register,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  login,required TResult Function()  loginWithGoogle,required TResult Function()  logout,required TResult Function()  checkLogin,required TResult Function( String email,  String password,  String? name,  String? avatarUrl,  String? username)  register,}) {final _that = this;
 switch (_that) {
 case _Login():
-return login(_that.email,_that.password);case _Logout():
+return login(_that.email,_that.password);case _LoginWithGoogle():
+return loginWithGoogle();case _Logout():
 return logout();case _CheckLogin():
 return checkLogin();case _Register():
 return register(_that.email,_that.password,_that.name,_that.avatarUrl,_that.username);case _:
@@ -175,10 +180,11 @@ return register(_that.email,_that.password,_that.name,_that.avatarUrl,_that.user
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  login,TResult? Function()?  logout,TResult? Function()?  checkLogin,TResult? Function( String email,  String password,  String? name,  String? avatarUrl,  String? username)?  register,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  login,TResult? Function()?  loginWithGoogle,TResult? Function()?  logout,TResult? Function()?  checkLogin,TResult? Function( String email,  String password,  String? name,  String? avatarUrl,  String? username)?  register,}) {final _that = this;
 switch (_that) {
 case _Login() when login != null:
-return login(_that.email,_that.password);case _Logout() when logout != null:
+return login(_that.email,_that.password);case _LoginWithGoogle() when loginWithGoogle != null:
+return loginWithGoogle();case _Logout() when logout != null:
 return logout();case _CheckLogin() when checkLogin != null:
 return checkLogin();case _Register() when register != null:
 return register(_that.email,_that.password,_that.name,_that.avatarUrl,_that.username);case _:
@@ -256,6 +262,38 @@ as String,
 
 
 }
+
+/// @nodoc
+
+
+class _LoginWithGoogle implements AuthEvent {
+  const _LoginWithGoogle();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginWithGoogle);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthEvent.loginWithGoogle()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 

@@ -4,55 +4,69 @@ import 'package:clips_tack/core/extensions/context_ext.dart';
 import 'package:clips_tack/core/widgets/app_scaffold.dart';
 import 'package:clips_tack/core/widgets/app_snack_bar.dart';
 import 'package:clips_tack/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:clips_tack/features/auth/presentation/widgets/login_form.dart';
+import 'package:clips_tack/features/auth/presentation/widgets/register_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+  late final TextEditingController _nameController;
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
+  late final TextEditingController _confirmPasswordController;
 
   bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   void initState() {
     super.initState();
+    _nameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
     context.read<AuthBloc>().add(const AuthEvent.checkLogin());
   }
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
-  void _login() {
+  void _register() {
     context.hideKeyboard();
 
     if (!(_formKey.currentState?.validate() ?? false)) {
       return;
     }
 
+    final email = _emailController.text.trim();
+
     context.read<AuthBloc>().add(
-      AuthEvent.login(_emailController.text.trim(), _passwordController.text),
+      AuthEvent.register(
+        email,
+        _passwordController.text,
+        _nameController.text.trim(),
+        null,
+        email.split('@').first,
+      ),
     );
   }
 
-  void _loginWithGoogle() {
-    context.hideKeyboard();
-    context.read<AuthBloc>().add(const AuthEvent.loginWithGoogle());
+  void _goToLogin() {
+    context.goNamed(AppRoutes.login);
   }
 
   void _togglePasswordVisibility() {
@@ -61,15 +75,24 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void _forgotPassword() {
-    _showSnackBar(
-      context.l10n.loginForgotPasswordUnavailable,
-      type: AppSnackBarType.info,
-    );
+  void _toggleConfirmPasswordVisibility() {
+    setState(() {
+      _obscureConfirmPassword = !_obscureConfirmPassword;
+    });
   }
 
-  void _goToRegister() {
-    context.goNamed(AppRoutes.register);
+  String? _validateName(String? value) {
+    final name = value?.trim() ?? '';
+
+    if (name.isEmpty) {
+      return context.l10n.registerNameRequired;
+    }
+
+    if (name.length < 2) {
+      return context.l10n.registerNameTooShort;
+    }
+
+    return null;
   }
 
   String? _validateEmail(String? value) {
@@ -97,6 +120,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (value!.length < 6) {
       return context.l10n.loginPasswordTooShort;
+    }
+
+    return null;
+  }
+
+  String? _validateConfirmPassword(String? value) {
+    if ((value ?? '').isEmpty) {
+      return context.l10n.registerConfirmPasswordRequired;
+    }
+
+    if (value != _passwordController.text) {
+      return context.l10n.registerPasswordsDoNotMatch;
     }
 
     return null;
@@ -155,19 +190,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: AppInsets.page,
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 430),
-                    child: LoginForm(
+                    child: RegisterForm(
                       formKey: _formKey,
+                      nameController: _nameController,
                       emailController: _emailController,
                       passwordController: _passwordController,
+                      confirmPasswordController: _confirmPasswordController,
                       obscurePassword: _obscurePassword,
+                      obscureConfirmPassword: _obscureConfirmPassword,
                       isLoading: isLoading,
-                      onLogin: _login,
-                      onLoginWithGoogle: _loginWithGoogle,
-                      onRegister: _goToRegister,
-                      onForgotPassword: _forgotPassword,
+                      onRegister: _register,
+                      onLogin: _goToLogin,
                       onTogglePasswordVisibility: _togglePasswordVisibility,
+                      onToggleConfirmPasswordVisibility:
+                          _toggleConfirmPasswordVisibility,
+                      validateName: _validateName,
                       validateEmail: _validateEmail,
                       validatePassword: _validatePassword,
+                      validateConfirmPassword: _validateConfirmPassword,
                     ),
                   ),
                 ),

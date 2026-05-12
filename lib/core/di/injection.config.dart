@@ -21,6 +21,8 @@ import 'package:clips_tack/features/auth/domain/repositories/auth_repository.dar
     as _i791;
 import 'package:clips_tack/features/auth/domain/usecases/auth_check_login_usecase.dart'
     as _i814;
+import 'package:clips_tack/features/auth/domain/usecases/auth_google_login_usecase.dart'
+    as _i985;
 import 'package:clips_tack/features/auth/domain/usecases/auth_login_usecase.dart'
     as _i122;
 import 'package:clips_tack/features/auth/domain/usecases/auth_logout_usecase.dart'
@@ -54,20 +56,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i789.ClipboardLocalDataSource>(
       () => _i789.ClipboardLocalDataSourceImpl(),
     );
-    gh.lazySingleton<_i779.AuthDataSource>(
-      () => _i779.AuthDataSourceImpl(gh<_i59.FirebaseAuth>()),
-    );
     gh.lazySingleton<_i424.UserDataSource>(
       () => _i424.UserDataSourceImpl(gh<_i974.FirebaseFirestore>()),
     );
     gh.lazySingleton<_i31.ClipboardRepository>(
       () => _i31.ClipboardRepository(gh<_i789.ClipboardLocalDataSource>()),
     );
-    gh.lazySingleton<_i279.ClipboardService>(
-      () => _i279.SystemClipboardService(gh<_i31.ClipboardRepository>()),
-    );
-    gh.factory<_i647.ClipboardCubit>(
-      () => _i647.ClipboardCubit.create(gh<_i279.ClipboardService>()),
+    gh.lazySingleton<_i779.AuthDataSource>(
+      () => _i779.AuthDataSourceImpl(gh<_i59.FirebaseAuth>()),
     );
     gh.lazySingleton<_i791.AuthRepository>(
       () => _i429.AuthRepositoryImpl(
@@ -75,8 +71,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i424.UserDataSource>(),
       ),
     );
+    gh.factory<_i122.AuthLoginUseCase>(
+      () => _i122.AuthLoginUseCase(repository: gh<_i791.AuthRepository>()),
+    );
     gh.factory<_i814.AuthCheckLoginUseCase>(
       () => _i814.AuthCheckLoginUseCase(gh<_i791.AuthRepository>()),
+    );
+    gh.factory<_i985.AuthGoogleLoginUseCase>(
+      () => _i985.AuthGoogleLoginUseCase(gh<_i791.AuthRepository>()),
     );
     gh.factory<_i803.AuthLogoutUseCase>(
       () => _i803.AuthLogoutUseCase(gh<_i791.AuthRepository>()),
@@ -84,8 +86,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i425.AuthRegisterUseCase>(
       () => _i425.AuthRegisterUseCase(gh<_i791.AuthRepository>()),
     );
-    gh.factory<_i122.AuthLoginUseCase>(
-      () => _i122.AuthLoginUseCase(repository: gh<_i791.AuthRepository>()),
+    gh.lazySingleton<_i279.ClipboardService>(
+      () => _i279.SystemClipboardService(gh<_i31.ClipboardRepository>()),
+    );
+    gh.factory<_i647.ClipboardCubit>(
+      () => _i647.ClipboardCubit.create(gh<_i279.ClipboardService>()),
     );
     return this;
   }

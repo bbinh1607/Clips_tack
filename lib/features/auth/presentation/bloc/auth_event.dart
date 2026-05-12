@@ -4,6 +4,8 @@ part of 'auth_bloc.dart';
 class AuthEvent with _$AuthEvent {
   const factory AuthEvent.login(String email, String password) = _Login;
 
+  const factory AuthEvent.loginWithGoogle() = _LoginWithGoogle;
+
   const factory AuthEvent.logout() = _Logout;
 
   const factory AuthEvent.checkLogin() = _CheckLogin;
