@@ -3,7 +3,7 @@ import 'package:clips_tack/core/extensions/context_ext.dart';
 import 'package:clips_tack/core/widgets/app_button.dart';
 import 'package:clips_tack/core/widgets/app_scaffold.dart';
 import 'package:clips_tack/core/widgets/app_text.dart';
-import 'package:clips_tack/features/clipboard/cubit/clipboard_cubit.dart';
+import 'package:clips_tack/features/clipboard/presentation/bloc/clipboard_bloc.dart';
 import 'package:clips_tack/features/home/models/clip_editor_payload.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,13 +46,17 @@ class _ClipEditorScreenState extends State<ClipEditorScreen> {
     setState(() {});
   }
 
-  void _save() {
-    final cubit = context.read<ClipboardCubit>();
+  Future<void> _save() async {
+    final bloc = context.read<ClipboardBloc>();
     final l10n = context.l10n;
     final value = _controller.text.trim();
     final didSave = _isEditing
-        ? cubit.updateClip(id: widget.payload.clipId!, content: value)
-        : cubit.addClip(value);
+        ? await bloc.updateClip(id: widget.payload.clipId!, content: value)
+        : await bloc.addClip(value);
+
+    if (!mounted) {
+      return;
+    }
 
     context.pop(
       didSave

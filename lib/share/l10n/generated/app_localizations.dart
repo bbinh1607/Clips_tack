@@ -344,6 +344,54 @@ abstract class AppLocalizations {
   /// **'Vietnamese'**
   String get languageVietnamese;
 
+  /// No description provided for @overlaySectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Floating access'**
+  String get overlaySectionTitle;
+
+  /// No description provided for @overlayBubbleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'ClipStack bubble'**
+  String get overlayBubbleTitle;
+
+  /// No description provided for @overlayBubbleSubtitleOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing over other apps'**
+  String get overlayBubbleSubtitleOn;
+
+  /// No description provided for @overlayBubbleSubtitleOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Show a draggable bubble over other apps.'**
+  String get overlayBubbleSubtitleOff;
+
+  /// No description provided for @overlayBubblePermissionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow display over other apps to use the bubble.'**
+  String get overlayBubblePermissionSubtitle;
+
+  /// No description provided for @overlayPermissionMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on Display over other apps for ClipStack, then return here.'**
+  String get overlayPermissionMessage;
+
+  /// No description provided for @overlayStartedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Bubble is showing'**
+  String get overlayStartedMessage;
+
+  /// No description provided for @overlayStoppedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Bubble is hidden'**
+  String get overlayStoppedMessage;
+
   /// No description provided for @clipboardSectionTitle.
   ///
   /// In en, this message translates to:
@@ -661,6 +709,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Already have an account? Sign in'**
   String get registerGoToLoginButton;
+
+  /// No description provided for @accountSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get accountSectionTitle;
+
+  /// No description provided for @logoutAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get logoutAction;
+
+  /// No description provided for @logoutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out and return to the login screen'**
+  String get logoutSubtitle;
 
   /// No description provided for @textOr.
   ///

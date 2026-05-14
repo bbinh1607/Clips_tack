@@ -113,6 +113,9 @@ abstract final class AppSize {
 
 abstract final class AppDuration {
   static const Duration short = Duration(milliseconds: 200);
+  static const Duration clipExpand = Duration(milliseconds: 430);
+  static const Duration clipCollapse = Duration(milliseconds: 280);
+  static const Duration clipDetailContent = Duration(milliseconds: 240);
   static const Duration clipboardPolling = Duration(seconds: 1);
   static const Duration relativeTimeTicker = Duration(minutes: 1);
 }

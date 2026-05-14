@@ -149,6 +149,33 @@ class AppLocalizationsVi extends AppLocalizations {
   String get languageVietnamese => 'Tiếng Việt';
 
   @override
+  String get overlaySectionTitle => 'Truy cập nổi';
+
+  @override
+  String get overlayBubbleTitle => 'Bong bóng ClipStack';
+
+  @override
+  String get overlayBubbleSubtitleOn => 'Đang nổi trên ứng dụng khác';
+
+  @override
+  String get overlayBubbleSubtitleOff =>
+      'Hiện bong bóng có thể kéo trên ứng dụng khác.';
+
+  @override
+  String get overlayBubblePermissionSubtitle =>
+      'Cho phép hiển thị trên ứng dụng khác để dùng bong bóng.';
+
+  @override
+  String get overlayPermissionMessage =>
+      'Bật quyền hiển thị trên ứng dụng khác cho ClipStack, rồi quay lại đây.';
+
+  @override
+  String get overlayStartedMessage => 'Đã hiện bong bóng';
+
+  @override
+  String get overlayStoppedMessage => 'Đã ẩn bong bóng';
+
+  @override
   String get clipboardSectionTitle => 'Clipboard';
 
   @override
@@ -346,6 +373,15 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get registerGoToLoginButton => 'Đã có tài khoản? Đăng nhập';
+
+  @override
+  String get accountSectionTitle => 'Tài khoản';
+
+  @override
+  String get logoutAction => 'Đăng xuất';
+
+  @override
+  String get logoutSubtitle => 'Thoát tài khoản và quay về màn hình đăng nhập';
 
   @override
   String get textOr => 'Hoặc';

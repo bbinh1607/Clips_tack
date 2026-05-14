@@ -57,6 +57,14 @@
   "languageTitle": "Ngôn ngữ",
   "languageEnglish": "Tiếng Anh",
   "languageVietnamese": "Tiếng Việt",
+  "overlaySectionTitle": "Truy cập nổi",
+  "overlayBubbleTitle": "Bong bóng ClipStack",
+  "overlayBubbleSubtitleOn": "Đang nổi trên ứng dụng khác",
+  "overlayBubbleSubtitleOff": "Hiện bong bóng có thể kéo trên ứng dụng khác.",
+  "overlayBubblePermissionSubtitle": "Cho phép hiển thị trên ứng dụng khác để dùng bong bóng.",
+  "overlayPermissionMessage": "Bật quyền hiển thị trên ứng dụng khác cho ClipStack, rồi quay lại đây.",
+  "overlayStartedMessage": "Đã hiện bong bóng",
+  "overlayStoppedMessage": "Đã ẩn bong bóng",
   "clipboardSectionTitle": "Clipboard",
   "autoTrackingTitle": "Tự động theo dõi",
   "autoTrackingSubtitle": "Bật khi ứng dụng đang mở",
@@ -152,5 +160,8 @@
   "registerButton": "Đăng ký bằng Gmail",
   "registerLoadingButton": "Đang tạo tài khoản...",
   "registerGoToLoginButton": "Đã có tài khoản? Đăng nhập",
+  "accountSectionTitle": "Tài khoản",
+  "logoutAction": "Đăng xuất",
+  "logoutSubtitle": "Thoát tài khoản và quay về màn hình đăng nhập",
   "textOr": "Hoặc"
 }

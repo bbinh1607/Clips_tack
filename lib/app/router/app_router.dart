@@ -1,11 +1,16 @@
+import 'dart:ui';
+
 import 'package:clips_tack/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:clips_tack/features/auth/presentation/screen/login_scren.dart';
 import 'package:clips_tack/features/auth/presentation/screen/register_screen.dart';
+import 'package:clips_tack/core/constants/app_constants.dart';
+import 'package:clips_tack/features/home/models/clip_detail_payload.dart';
 import 'package:clips_tack/features/home/models/clip_editor_payload.dart';
-import 'package:clips_tack/features/home/presentation/clip_editor_screen.dart';
-import 'package:clips_tack/features/home/presentation/clip_stack_shell.dart';
-import 'package:clips_tack/features/home/presentation/clipboard_list_screen.dart';
-import 'package:clips_tack/features/home/presentation/settings_screen.dart';
+import 'package:clips_tack/features/home/presentation/screen/clip_detail_screen.dart';
+import 'package:clips_tack/features/home/presentation/screen/clip_editor_screen.dart';
+import 'package:clips_tack/features/home/presentation/screen/clip_stack_shell.dart';
+import 'package:clips_tack/features/home/presentation/screen/clipboard_list_screen.dart';
+import 'package:clips_tack/features/home/presentation/screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +22,7 @@ abstract final class AppRoutes {
   static const starred = '/starred';
   static const settings = '/settings';
   static const editor = '/editor';
+  static const clipDetail = '/clip-detail';
 }
 
 GoRouter createAppRouter() {
@@ -84,6 +90,36 @@ GoRouter createAppRouter() {
         ],
       ),
       GoRoute(
+        path: AppRoutes.clipDetail,
+        name: AppRoutes.clipDetail,
+        pageBuilder: (context, state) {
+          final payload = state.extra is ClipDetailPayload
+              ? state.extra! as ClipDetailPayload
+              : null;
+
+          if (payload == null) {
+            return const NoTransitionPage(child: SizedBox.shrink());
+          }
+
+          return CustomTransitionPage<String>(
+            key: state.pageKey,
+            transitionDuration: AppDuration.clipExpand,
+            reverseTransitionDuration: AppDuration.clipCollapse,
+            child: AuthenticatedRouteGuard(
+              child: ClipDetailScreen(initialItem: payload.item),
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+                  return _ClipDetailRouteTransition(
+                    animation: animation,
+                    sourceRect: payload.sourceRect,
+                    child: child,
+                  );
+                },
+          );
+        },
+      ),
+      GoRoute(
         path: AppRoutes.editor,
         name: AppRoutes.editor,
         builder: (context, state) {
@@ -135,6 +171,76 @@ class AuthenticatedRouteGuard extends StatelessWidget {
           return child;
         },
       ),
+    );
+  }
+}
+
+class _ClipDetailRouteTransition extends StatelessWidget {
+  const _ClipDetailRouteTransition({
+    required this.animation,
+    required this.child,
+    this.sourceRect,
+  });
+
+  final Animation<double> animation;
+  final Rect? sourceRect;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final source = sourceRect;
+    if (source == null ||
+        source.isEmpty ||
+        !source.isFinite ||
+        source.width <= 0 ||
+        source.height <= 0) {
+      return FadeTransition(
+        opacity: CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOutCubic,
+          reverseCurve: Curves.easeInCubic,
+        ),
+        child: child,
+      );
+    }
+
+    return AnimatedBuilder(
+      animation: animation,
+      child: child,
+      builder: (context, child) {
+        final curve = animation.status == AnimationStatus.reverse
+            ? Curves.easeInCubic
+            : Curves.easeOutCubic;
+        final value = curve.transform(animation.value);
+        final screenRect = Offset.zero & MediaQuery.sizeOf(context);
+        final rect = Rect.lerp(source, screenRect, value)!;
+        final radius = lerpDouble(AppRadius.largeValue, 0, value)!;
+
+        return Stack(
+          fit: StackFit.expand,
+          children: [
+            ColoredBox(
+              color: Theme.of(
+                context,
+              ).colorScheme.surface.withValues(alpha: value * 0.28),
+            ),
+            Positioned.fromRect(
+              rect: rect,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(radius),
+                child: OverflowBox(
+                  alignment: Alignment.topLeft,
+                  minWidth: screenRect.width,
+                  maxWidth: screenRect.width,
+                  minHeight: screenRect.height,
+                  maxHeight: screenRect.height,
+                  child: SizedBox.fromSize(size: screenRect.size, child: child),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

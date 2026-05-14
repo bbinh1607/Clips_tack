@@ -19,11 +19,23 @@ class ClipboardLocalDataSourceImpl implements ClipboardLocalDataSource {
     final prefs = await SharedPreferences.getInstance();
     final jsonString = prefs.getString(_key);
 
-    if (jsonString == null) return [];
+    if (jsonString == null) {
+      return <ClipboardItem>[];
+    }
 
-    final List decoded = jsonDecode(jsonString);
+    try {
+      final decoded = jsonDecode(jsonString);
+      if (decoded is! List) {
+        return <ClipboardItem>[];
+      }
 
-    return decoded.map((e) => ClipboardItem.fromJson(e)).toList();
+      return decoded
+          .whereType<Map<String, dynamic>>()
+          .map(ClipboardItem.fromJson)
+          .toList(growable: false);
+    } catch (_) {
+      return <ClipboardItem>[];
+    }
   }
 
   @override

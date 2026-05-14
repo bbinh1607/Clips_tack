@@ -148,6 +148,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageVietnamese => 'Vietnamese';
 
   @override
+  String get overlaySectionTitle => 'Floating access';
+
+  @override
+  String get overlayBubbleTitle => 'ClipStack bubble';
+
+  @override
+  String get overlayBubbleSubtitleOn => 'Showing over other apps';
+
+  @override
+  String get overlayBubbleSubtitleOff =>
+      'Show a draggable bubble over other apps.';
+
+  @override
+  String get overlayBubblePermissionSubtitle =>
+      'Allow display over other apps to use the bubble.';
+
+  @override
+  String get overlayPermissionMessage =>
+      'Turn on Display over other apps for ClipStack, then return here.';
+
+  @override
+  String get overlayStartedMessage => 'Bubble is showing';
+
+  @override
+  String get overlayStoppedMessage => 'Bubble is hidden';
+
+  @override
   String get clipboardSectionTitle => 'Clipboard';
 
   @override
@@ -346,6 +373,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get registerGoToLoginButton => 'Already have an account? Sign in';
+
+  @override
+  String get accountSectionTitle => 'Account';
+
+  @override
+  String get logoutAction => 'Log out';
+
+  @override
+  String get logoutSubtitle => 'Sign out and return to the login screen';
 
   @override
   String get textOr => 'Or';

@@ -57,6 +57,14 @@
   "languageTitle": "Language",
   "languageEnglish": "English",
   "languageVietnamese": "Vietnamese",
+  "overlaySectionTitle": "Floating access",
+  "overlayBubbleTitle": "ClipStack bubble",
+  "overlayBubbleSubtitleOn": "Showing over other apps",
+  "overlayBubbleSubtitleOff": "Show a draggable bubble over other apps.",
+  "overlayBubblePermissionSubtitle": "Allow display over other apps to use the bubble.",
+  "overlayPermissionMessage": "Turn on Display over other apps for ClipStack, then return here.",
+  "overlayStartedMessage": "Bubble is showing",
+  "overlayStoppedMessage": "Bubble is hidden",
   "clipboardSectionTitle": "Clipboard",
   "autoTrackingTitle": "Auto tracking",
   "autoTrackingSubtitle": "On while the app is open",
@@ -152,5 +160,8 @@
   "registerButton": "Register with Gmail",
   "registerLoadingButton": "Creating account...",
   "registerGoToLoginButton": "Already have an account? Sign in",
+  "accountSectionTitle": "Account",
+  "logoutAction": "Log out",
+  "logoutSubtitle": "Sign out and return to the login screen",
   "textOr": "Or"
 }

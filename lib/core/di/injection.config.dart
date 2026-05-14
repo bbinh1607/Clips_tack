@@ -29,14 +29,14 @@ import 'package:clips_tack/features/auth/domain/usecases/auth_logout_usecase.dar
     as _i803;
 import 'package:clips_tack/features/auth/domain/usecases/auth_register_usecase.dart'
     as _i425;
-import 'package:clips_tack/features/clipboard/cubit/clipboard_cubit.dart'
-    as _i647;
 import 'package:clips_tack/features/clipboard/data/datasource/clipboard_local_data_source.dart'
     as _i789;
 import 'package:clips_tack/features/clipboard/data/repository/clipboard_repository.dart'
     as _i31;
 import 'package:clips_tack/features/clipboard/data/services/clipboard_service.dart'
     as _i279;
+import 'package:clips_tack/features/clipboard/presentation/bloc/clipboard_bloc.dart'
+    as _i647;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
@@ -89,8 +89,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i279.ClipboardService>(
       () => _i279.SystemClipboardService(gh<_i31.ClipboardRepository>()),
     );
-    gh.factory<_i647.ClipboardCubit>(
-      () => _i647.ClipboardCubit.create(gh<_i279.ClipboardService>()),
+    gh.factory<_i647.ClipboardBloc>(
+      () => _i647.ClipboardBloc.create(gh<_i279.ClipboardService>()),
     );
     return this;
   }

@@ -18,7 +18,6 @@ class SystemClipboardService implements ClipboardService {
 
   final ClipboardRepository _repository;
 
-  // 🔹 SYSTEM CLIPBOARD
   @override
   Future<String?> readText() async {
     final data = await Clipboard.getData(Clipboard.kTextPlain);
@@ -30,7 +29,6 @@ class SystemClipboardService implements ClipboardService {
     return Clipboard.setData(ClipboardData(text: text));
   }
 
-  // 🔹 LOCAL STORAGE (qua repository)
   @override
   Future<List<ClipboardItem>> loadLocal() {
     return _repository.load();

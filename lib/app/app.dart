@@ -9,7 +9,7 @@ import 'package:clips_tack/features/auth/domain/usecases/auth_login_usecase.dart
 import 'package:clips_tack/features/auth/domain/usecases/auth_logout_usecase.dart';
 import 'package:clips_tack/features/auth/domain/usecases/auth_register_usecase.dart';
 import 'package:clips_tack/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:clips_tack/features/clipboard/cubit/clipboard_cubit.dart';
+import 'package:clips_tack/features/clipboard/presentation/bloc/clipboard_bloc.dart';
 import 'package:clips_tack/share/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +25,7 @@ class ClipStackApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => getIt<AppSettingsCubit>()),
-        BlocProvider(create: (_) => getIt<ClipboardCubit>()),
+        BlocProvider(create: (_) => getIt<ClipboardBloc>()),
         BlocProvider(
           create: (_) => AuthBloc(
             getIt<AuthLoginUseCase>(),
