@@ -236,6 +236,12 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get deleteAction;
 
+  /// No description provided for @moreActionsTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'More actions'**
+  String get moreActionsTooltip;
+
   /// No description provided for @deletedMessage.
   ///
   /// In en, this message translates to:
@@ -563,7 +569,7 @@ abstract class AppLocalizations {
   /// No description provided for @loginButton.
   ///
   /// In en, this message translates to:
-  /// **'Sign in with Gmail'**
+  /// **'Sign in'**
   String get loginButton;
 
   /// No description provided for @loginLoadingButton.
@@ -695,7 +701,7 @@ abstract class AppLocalizations {
   /// No description provided for @registerButton.
   ///
   /// In en, this message translates to:
-  /// **'Register with Gmail'**
+  /// **'Create account'**
   String get registerButton;
 
   /// No description provided for @registerLoadingButton.

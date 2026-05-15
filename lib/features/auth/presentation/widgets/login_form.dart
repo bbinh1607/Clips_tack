@@ -1,8 +1,8 @@
-import 'package:clips_tack/core/assets/app_svg.dart';
 import 'package:clips_tack/core/constants/app_constants.dart';
 import 'package:clips_tack/core/extensions/context_ext.dart';
 import 'package:clips_tack/core/widgets/app_button.dart';
 import 'package:clips_tack/core/widgets/app_text.dart';
+import 'package:clips_tack/features/auth/presentation/widgets/google_sign_in_button.dart';
 import 'package:clips_tack/features/auth/presentation/widgets/login_brand.dart';
 import 'package:clips_tack/features/auth/presentation/widgets/login_panel.dart';
 import 'package:clips_tack/features/auth/presentation/widgets/login_text_field.dart';
@@ -123,7 +123,7 @@ class LoginForm extends StatelessWidget {
                 const SizedBox(height: AppSpace.xxl),
                 _DividerLabel(label: l10n.textOr),
                 const SizedBox(height: AppSpace.xxl),
-                _GoogleSignInButton(
+                GoogleSignInButton(
                   label: l10n.loginGoogleButton,
                   onPressed: isLoading ? null : onLoginWithGoogle,
                 ),
@@ -189,42 +189,6 @@ class _DividerLabel extends StatelessWidget {
         ),
         Expanded(child: Divider(color: dividerColor)),
       ],
-    );
-  }
-}
-
-class _GoogleSignInButton extends StatelessWidget {
-  const _GoogleSignInButton({required this.label, required this.onPressed});
-
-  final String label;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: onPressed,
-      style: const ButtonStyle(
-        minimumSize: WidgetStatePropertyAll(
-          Size(0, AppSize.primaryButtonHeight),
-        ),
-        padding: WidgetStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: AppSpace.xxl),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const AppSvgImage(
-            asset: AppSvg.iconGoogle,
-            width: AppSize.iconMedium,
-            height: AppSize.iconMedium,
-          ),
-          const SizedBox(width: AppSpace.lg),
-          Flexible(
-            child: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
-          ),
-        ],
-      ),
     );
   }
 }

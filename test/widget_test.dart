@@ -4,8 +4,8 @@ import 'package:clips_tack/core/di/injection.dart';
 import 'package:clips_tack/core/typedef/typedef.dart';
 import 'package:clips_tack/features/auth/domain/entities/user_entity.dart';
 import 'package:clips_tack/features/auth/domain/repositories/auth_repository.dart';
-import 'package:clips_tack/features/clipboard/data/services/clipboard_service.dart';
-import 'package:clips_tack/features/clipboard/models/clipboard_item.dart';
+import 'package:clips_tack/features/clipboard/domain/entities/clipboard_item.dart';
+import 'package:clips_tack/features/clipboard/domain/repositories/clipboard_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,9 +16,11 @@ void main() {
     await configureDependencies();
     await getIt.unregister<AuthRepository>();
     getIt
-      ..unregister<ClipboardService>()
+      ..unregister<ClipboardRepository>()
       ..registerLazySingleton<AuthRepository>(_FakeAuthRepository.new)
-      ..registerLazySingleton<ClipboardService>(_FakeClipboardService.new);
+      ..registerLazySingleton<ClipboardRepository>(
+        _FakeClipboardRepository.new,
+      );
   });
 
   tearDown(() async {
@@ -41,6 +43,11 @@ class _FakeAuthRepository implements AuthRepository {
 
   @override
   DataState<bool> isLoggedIn() async => const Right<Failure, bool>(true);
+
+  @override
+  DataState<UserEntity?> currentUser() async {
+    return const Right<Failure, UserEntity?>(_user);
+  }
 
   @override
   DataState<UserEntity> login(String email, String password) async {
@@ -67,16 +74,16 @@ class _FakeAuthRepository implements AuthRepository {
   }
 }
 
-class _FakeClipboardService implements ClipboardService {
+class _FakeClipboardRepository implements ClipboardRepository {
   @override
-  Future<String?> readText() async => null;
+  Future<String?> readClipboardText() async => null;
 
   @override
-  Future<void> writeText(String text) async {}
+  Future<void> writeClipboardText(String text) async {}
 
   @override
-  Future<List<ClipboardItem>> loadLocal() async => <ClipboardItem>[];
+  Future<List<ClipboardItem>> loadItems() async => <ClipboardItem>[];
 
   @override
-  Future<void> saveLocal(List<ClipboardItem> items) async {}
+  Future<void> saveItems(List<ClipboardItem> items) async {}
 }

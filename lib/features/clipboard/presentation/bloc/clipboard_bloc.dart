@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:clips_tack/core/constants/app_constants.dart';
-import 'package:clips_tack/features/clipboard/data/services/clipboard_service.dart';
-import 'package:clips_tack/features/clipboard/models/clipboard_item.dart';
+import 'package:clips_tack/features/clipboard/domain/entities/clipboard_item.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/clipboard_usecases.dart';
 import 'package:injectable/injectable.dart';
 
 import 'clipboard_state.dart';
@@ -14,14 +14,13 @@ part 'clipboard_event.dart';
 @injectable
 class ClipboardBloc extends Bloc<ClipboardEvent, ClipboardState> {
   @factoryMethod
-  ClipboardBloc.create(ClipboardService clipboardService)
-    : this(clipboardService: clipboardService);
+  ClipboardBloc.create(ClipboardUseCases useCases) : this(useCases: useCases);
 
   ClipboardBloc({
-    required ClipboardService clipboardService,
+    required ClipboardUseCases useCases,
     this.pollInterval = AppDuration.clipboardPolling,
     this.enableClipboardTracking = true,
-  }) : _clipboardService = clipboardService,
+  }) : _useCases = useCases,
        super(const ClipboardState()) {
     on<ClipboardStarted>(_onStarted);
     on<ClipboardSearchChanged>(_onSearchChanged);
@@ -40,7 +39,7 @@ class ClipboardBloc extends Bloc<ClipboardEvent, ClipboardState> {
     }
   }
 
-  final ClipboardService _clipboardService;
+  final ClipboardUseCases _useCases;
   final Duration pollInterval;
   final bool enableClipboardTracking;
 
@@ -88,8 +87,8 @@ class ClipboardBloc extends Bloc<ClipboardEvent, ClipboardState> {
     Emitter<ClipboardState> emit,
   ) async {
     try {
-      final items = await _clipboardService.loadLocal();
-      emit(state.copyWith(items: _sort(items)));
+      final items = await _useCases.loadItems();
+      emit(state.copyWith(items: items));
     } catch (_) {}
   }
 
@@ -105,7 +104,7 @@ class ClipboardBloc extends Bloc<ClipboardEvent, ClipboardState> {
     Emitter<ClipboardState> emit,
   ) async {
     try {
-      event.completer.complete(_normalize(await _clipboardService.readText()));
+      event.completer.complete(_normalize(await _useCases.readClipboardText()));
     } catch (_) {
       event.completer.complete(null);
     }
@@ -123,7 +122,7 @@ class ClipboardBloc extends Bloc<ClipboardEvent, ClipboardState> {
     }
 
     try {
-      await _clipboardService.writeText(normalized);
+      await _useCases.writeClipboardText(normalized);
       _lastObservedClipboard = normalized;
       event.completer.complete();
     } catch (error, stackTrace) {
@@ -132,72 +131,62 @@ class ClipboardBloc extends Bloc<ClipboardEvent, ClipboardState> {
   }
 
   void _onClipAdded(ClipboardClipAdded event, Emitter<ClipboardState> emit) {
-    event.completer.complete(_addNormalizedClip(event.content, emit));
+    final result = _useCases.addItem(
+      content: event.content,
+      currentItems: state.items,
+    );
+
+    if (result.didChange) {
+      emit(state.copyWith(items: result.items));
+      _persist(result.items);
+    }
+
+    event.completer.complete(result.didChange);
   }
 
   void _onClipUpdated(
     ClipboardClipUpdated event,
     Emitter<ClipboardState> emit,
   ) {
-    final normalized = _normalize(event.content);
+    final result = _useCases.updateItem(
+      id: event.id,
+      content: event.content,
+      currentItems: state.items,
+    );
 
-    if (normalized == null ||
-        _containsDuplicate(normalized, excludingId: event.id)) {
-      event.completer.complete(false);
-      return;
+    if (result.didChange) {
+      emit(state.copyWith(items: result.items));
+      _persist(result.items);
     }
 
-    var didUpdate = false;
-
-    final nextItems = state.items
-        .map((item) {
-          if (item.id != event.id) return item;
-
-          didUpdate = true;
-          return item.copyWith(content: normalized);
-        })
-        .toList(growable: false);
-
-    if (!didUpdate) {
-      event.completer.complete(false);
-      return;
-    }
-
-    final sorted = _sort(nextItems);
-
-    emit(state.copyWith(items: sorted));
-    _persist(sorted);
-    event.completer.complete(true);
+    event.completer.complete(result.didChange);
   }
 
   void _onClipPinToggled(
     ClipboardClipPinToggled event,
     Emitter<ClipboardState> emit,
   ) {
-    final nextItems = state.items
-        .map((item) {
-          if (item.id != event.id) return item;
+    final result = _useCases.togglePin(id: event.id, currentItems: state.items);
 
-          return item.copyWith(isPinned: !item.isPinned);
-        })
-        .toList(growable: false);
-
-    final sorted = _sort(nextItems);
-
-    emit(state.copyWith(items: sorted));
-    _persist(sorted);
+    if (result.didChange) {
+      emit(state.copyWith(items: result.items));
+      _persist(result.items);
+    }
   }
 
   void _onClipDeleted(
     ClipboardClipDeleted event,
     Emitter<ClipboardState> emit,
   ) {
-    final nextItems = state.items
-        .where((item) => item.id != event.id)
-        .toList(growable: false);
+    final result = _useCases.deleteItem(
+      id: event.id,
+      currentItems: state.items,
+    );
 
-    emit(state.copyWith(items: nextItems));
-    _persist(nextItems);
+    if (result.didChange) {
+      emit(state.copyWith(items: result.items));
+      _persist(result.items);
+    }
   }
 
   void _onExternalTextObserved(
@@ -205,7 +194,15 @@ class ClipboardBloc extends Bloc<ClipboardEvent, ClipboardState> {
     Emitter<ClipboardState> emit,
   ) {
     _lastObservedClipboard = event.content;
-    _addNormalizedClip(event.content, emit);
+    final result = _useCases.addItem(
+      content: event.content,
+      currentItems: state.items,
+    );
+
+    if (result.didChange) {
+      emit(state.copyWith(items: result.items));
+      _persist(result.items);
+    }
   }
 
   void _startTracking() {
@@ -218,7 +215,7 @@ class ClipboardBloc extends Bloc<ClipboardEvent, ClipboardState> {
 
   Future<void> _syncClipboard() async {
     try {
-      final normalized = _normalize(await _clipboardService.readText());
+      final normalized = _normalize(await _useCases.readClipboardText());
 
       if (normalized == null || normalized == _lastObservedClipboard) {
         return;
@@ -230,36 +227,8 @@ class ClipboardBloc extends Bloc<ClipboardEvent, ClipboardState> {
     } catch (_) {}
   }
 
-  bool _addNormalizedClip(String content, Emitter<ClipboardState> emit) {
-    final normalized = _normalize(content);
-    if (normalized == null || _containsDuplicate(normalized)) {
-      return false;
-    }
-
-    final now = DateTime.now();
-    final nextItems = _sort([
-      ClipboardItem(
-        id: '${now.microsecondsSinceEpoch}-${normalized.hashCode}',
-        content: normalized,
-        createdAt: now,
-      ),
-      ...state.items,
-    ]);
-
-    emit(state.copyWith(items: nextItems));
-    _persist(nextItems);
-
-    return true;
-  }
-
   void _persist(List<ClipboardItem> items) {
-    unawaited(_clipboardService.saveLocal(items).catchError((_) {}));
-  }
-
-  bool _containsDuplicate(String content, {String? excludingId}) {
-    return state.items.any(
-      (item) => item.content == content && item.id != excludingId,
-    );
+    unawaited(_useCases.saveItems(items).catchError((_) {}));
   }
 
   String? _normalize(String? value) {
@@ -268,19 +237,6 @@ class ClipboardBloc extends Bloc<ClipboardEvent, ClipboardState> {
       return null;
     }
     return trimmed;
-  }
-
-  List<ClipboardItem> _sort(List<ClipboardItem> items) {
-    final sorted = [...items];
-
-    sorted.sort((a, b) {
-      if (a.isPinned != b.isPinned) {
-        return a.isPinned ? -1 : 1;
-      }
-      return b.createdAt.compareTo(a.createdAt);
-    });
-
-    return sorted;
   }
 
   @override

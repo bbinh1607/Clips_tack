@@ -1,4 +1,4 @@
-import 'package:clips_tack/features/clipboard/models/clipboard_item.dart';
+import 'package:clips_tack/features/clipboard/domain/entities/clipboard_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'clipboard_state.freezed.dart';

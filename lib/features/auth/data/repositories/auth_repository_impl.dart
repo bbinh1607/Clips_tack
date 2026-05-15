@@ -72,6 +72,14 @@ class AuthRepositoryImpl with BaseRepository implements AuthRepository {
     );
   }
 
+  @override
+  DataState<UserEntity?> currentUser() {
+    return safeCall(
+      call: () async => _authDataSource.currentUser(),
+      map: (model) => model?.toEntity(),
+    );
+  }
+
   Future<UserModel> _syncUserToFirestoreIfEnabled(UserModel user) async {
     if (!_syncUsersToFirestore) {
       return user;

@@ -29,12 +29,34 @@ import 'package:clips_tack/features/auth/domain/usecases/auth_logout_usecase.dar
     as _i803;
 import 'package:clips_tack/features/auth/domain/usecases/auth_register_usecase.dart'
     as _i425;
-import 'package:clips_tack/features/clipboard/data/datasource/clipboard_local_data_source.dart'
+import 'package:clips_tack/features/clipboard/data/datasources/clipboard_local_data_source.dart'
     as _i789;
-import 'package:clips_tack/features/clipboard/data/repository/clipboard_repository.dart'
+import 'package:clips_tack/features/clipboard/data/datasources/clipboard_system_data_source.dart'
+    as _i280;
+import 'package:clips_tack/features/clipboard/data/repositories/clipboard_repository_impl.dart'
     as _i31;
-import 'package:clips_tack/features/clipboard/data/services/clipboard_service.dart'
+import 'package:clips_tack/features/clipboard/domain/repositories/clipboard_repository.dart'
     as _i279;
+import 'package:clips_tack/features/clipboard/domain/usecases/add_clipboard_item.dart'
+    as _i201;
+import 'package:clips_tack/features/clipboard/domain/usecases/clipboard_usecases.dart'
+    as _i210;
+import 'package:clips_tack/features/clipboard/domain/usecases/delete_clipboard_item.dart'
+    as _i202;
+import 'package:clips_tack/features/clipboard/domain/usecases/load_clipboard_items.dart'
+    as _i203;
+import 'package:clips_tack/features/clipboard/domain/usecases/read_clipboard_text.dart'
+    as _i204;
+import 'package:clips_tack/features/clipboard/domain/usecases/save_clipboard_items.dart'
+    as _i205;
+import 'package:clips_tack/features/clipboard/domain/usecases/sort_clipboard_items.dart'
+    as _i206;
+import 'package:clips_tack/features/clipboard/domain/usecases/toggle_clipboard_pin.dart'
+    as _i207;
+import 'package:clips_tack/features/clipboard/domain/usecases/update_clipboard_item.dart'
+    as _i208;
+import 'package:clips_tack/features/clipboard/domain/usecases/write_clipboard_text.dart'
+    as _i209;
 import 'package:clips_tack/features/clipboard/presentation/bloc/clipboard_bloc.dart'
     as _i647;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
@@ -56,11 +78,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i789.ClipboardLocalDataSource>(
       () => _i789.ClipboardLocalDataSourceImpl(),
     );
+    gh.lazySingleton<_i280.ClipboardSystemDataSource>(
+      () => _i280.ClipboardSystemDataSourceImpl(),
+    );
+    gh.lazySingleton<_i206.SortClipboardItems>(
+      () => _i206.SortClipboardItems(),
+    );
     gh.lazySingleton<_i424.UserDataSource>(
       () => _i424.UserDataSourceImpl(gh<_i974.FirebaseFirestore>()),
     );
-    gh.lazySingleton<_i31.ClipboardRepository>(
-      () => _i31.ClipboardRepository(gh<_i789.ClipboardLocalDataSource>()),
+    gh.lazySingleton<_i279.ClipboardRepository>(
+      () => _i31.ClipboardRepositoryImpl(
+        gh<_i789.ClipboardLocalDataSource>(),
+        gh<_i280.ClipboardSystemDataSource>(),
+      ),
     );
     gh.lazySingleton<_i779.AuthDataSource>(
       () => _i779.AuthDataSourceImpl(gh<_i59.FirebaseAuth>()),
@@ -86,11 +117,47 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i425.AuthRegisterUseCase>(
       () => _i425.AuthRegisterUseCase(gh<_i791.AuthRepository>()),
     );
-    gh.lazySingleton<_i279.ClipboardService>(
-      () => _i279.SystemClipboardService(gh<_i31.ClipboardRepository>()),
+    gh.lazySingleton<_i203.LoadClipboardItems>(
+      () => _i203.LoadClipboardItems(
+        gh<_i279.ClipboardRepository>(),
+        gh<_i206.SortClipboardItems>(),
+      ),
+    );
+    gh.lazySingleton<_i205.SaveClipboardItems>(
+      () => _i205.SaveClipboardItems(gh<_i279.ClipboardRepository>()),
+    );
+    gh.lazySingleton<_i204.ReadClipboardText>(
+      () => _i204.ReadClipboardText(gh<_i279.ClipboardRepository>()),
+    );
+    gh.lazySingleton<_i209.WriteClipboardText>(
+      () => _i209.WriteClipboardText(gh<_i279.ClipboardRepository>()),
+    );
+    gh.lazySingleton<_i201.AddClipboardItem>(
+      () => _i201.AddClipboardItem(gh<_i206.SortClipboardItems>()),
+    );
+    gh.lazySingleton<_i208.UpdateClipboardItem>(
+      () => _i208.UpdateClipboardItem(gh<_i206.SortClipboardItems>()),
+    );
+    gh.lazySingleton<_i207.ToggleClipboardPin>(
+      () => _i207.ToggleClipboardPin(gh<_i206.SortClipboardItems>()),
+    );
+    gh.lazySingleton<_i202.DeleteClipboardItem>(
+      () => _i202.DeleteClipboardItem(),
+    );
+    gh.lazySingleton<_i210.ClipboardUseCases>(
+      () => _i210.ClipboardUseCases(
+        gh<_i203.LoadClipboardItems>(),
+        gh<_i205.SaveClipboardItems>(),
+        gh<_i204.ReadClipboardText>(),
+        gh<_i209.WriteClipboardText>(),
+        gh<_i201.AddClipboardItem>(),
+        gh<_i208.UpdateClipboardItem>(),
+        gh<_i207.ToggleClipboardPin>(),
+        gh<_i202.DeleteClipboardItem>(),
+      ),
     );
     gh.factory<_i647.ClipboardBloc>(
-      () => _i647.ClipboardBloc.create(gh<_i279.ClipboardService>()),
+      () => _i647.ClipboardBloc.create(gh<_i210.ClipboardUseCases>()),
     );
     return this;
   }

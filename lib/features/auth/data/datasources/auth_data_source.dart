@@ -15,6 +15,7 @@ abstract class AuthDataSource {
   });
   Future<void> logOut();
   bool isLoggedIn();
+  UserModel? currentUser();
 }
 
 @LazySingleton(as: AuthDataSource)
@@ -72,7 +73,12 @@ class AuthDataSourceImpl implements AuthDataSource {
     }
 
     await _ensureGoogleSignInInitialized();
-    await _googleSignIn.signOut();
+    try {
+      await _googleSignIn.signOut();
+    } on GoogleSignInException {
+      // Firebase is already signed out; do not keep the app in a fake loading
+      // or error state because the local Google credential cache failed.
+    }
   }
 
   @override
@@ -113,6 +119,17 @@ class AuthDataSourceImpl implements AuthDataSource {
     return _auth.currentUser != null;
   }
 
+  @override
+  UserModel? currentUser() {
+    final user = _auth.currentUser;
+
+    if (user == null) {
+      return null;
+    }
+
+    return UserModel.fromFirebase(user);
+  }
+
   Future<void> _ensureGoogleSignInInitialized() {
     final serverClientId = _googleServerClientId.trim();
 
@@ -122,49 +139,18 @@ class AuthDataSourceImpl implements AuthDataSource {
   }
 
   Future<OAuthCredential> _createGoogleCredential() async {
-    try {
-      final googleUser = await _googleSignIn.authenticate(
-        scopeHint: _googleAuthScopes,
-      );
-      final idToken = googleUser.authentication.idToken;
+    final googleUser = await _googleSignIn.authenticate(
+      scopeHint: _googleAuthScopes,
+    );
+    final idToken = googleUser.authentication.idToken;
 
-      if (idToken != null) {
-        return GoogleAuthProvider.credential(idToken: idToken);
-      }
-
-      final authorization = await _authorizeGoogleScopes(
-        googleUser.authorizationClient,
-      );
-
-      return GoogleAuthProvider.credential(
-        accessToken: authorization.accessToken,
-      );
-    } on GoogleSignInException catch (error) {
-      if (!_isMissingAndroidServerClientId(error)) {
-        rethrow;
-      }
-
-      final authorization = await _googleSignIn.authorizationClient
-          .authorizeScopes(_googleAuthScopes);
-
-      return GoogleAuthProvider.credential(
-        accessToken: authorization.accessToken,
+    if (idToken == null || idToken.isEmpty) {
+      throw const GoogleSignInException(
+        code: GoogleSignInExceptionCode.providerConfigurationError,
+        description: 'Google did not return an ID token.',
       );
     }
-  }
 
-  Future<GoogleSignInClientAuthorization> _authorizeGoogleScopes(
-    GoogleSignInAuthorizationClient authorizationClient,
-  ) async {
-    return await authorizationClient.authorizationForScopes(
-          _googleAuthScopes,
-        ) ??
-        authorizationClient.authorizeScopes(_googleAuthScopes);
-  }
-
-  bool _isMissingAndroidServerClientId(GoogleSignInException error) {
-    return error.code == GoogleSignInExceptionCode.clientConfigurationError &&
-        (error.description?.contains('serverClientId must be provided') ??
-            false);
+    return GoogleAuthProvider.credential(idToken: idToken);
   }
 }

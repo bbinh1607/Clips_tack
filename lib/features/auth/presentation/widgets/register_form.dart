@@ -2,6 +2,7 @@ import 'package:clips_tack/core/constants/app_constants.dart';
 import 'package:clips_tack/core/extensions/context_ext.dart';
 import 'package:clips_tack/core/widgets/app_button.dart';
 import 'package:clips_tack/core/widgets/app_text.dart';
+import 'package:clips_tack/features/auth/presentation/widgets/google_sign_in_button.dart';
 import 'package:clips_tack/features/auth/presentation/widgets/login_brand.dart';
 import 'package:clips_tack/features/auth/presentation/widgets/login_panel.dart';
 import 'package:clips_tack/features/auth/presentation/widgets/login_text_field.dart';
@@ -18,6 +19,7 @@ class RegisterForm extends StatelessWidget {
     required this.obscureConfirmPassword,
     required this.isLoading,
     required this.onRegister,
+    required this.onLoginWithGoogle,
     required this.onLogin,
     required this.onTogglePasswordVisibility,
     required this.onToggleConfirmPasswordVisibility,
@@ -37,6 +39,7 @@ class RegisterForm extends StatelessWidget {
   final bool obscureConfirmPassword;
   final bool isLoading;
   final VoidCallback onRegister;
+  final VoidCallback onLoginWithGoogle;
   final VoidCallback onLogin;
   final VoidCallback onTogglePasswordVisibility;
   final VoidCallback onToggleConfirmPasswordVisibility;
@@ -152,6 +155,13 @@ class RegisterForm extends StatelessWidget {
                   leadingIcon: isLoading ? null : Icons.person_add_alt_rounded,
                   onPressed: isLoading ? null : onRegister,
                 ),
+                const SizedBox(height: AppSpace.xxl),
+                _DividerLabel(label: l10n.textOr),
+                const SizedBox(height: AppSpace.xxl),
+                GoogleSignInButton(
+                  label: l10n.loginGoogleButton,
+                  onPressed: isLoading ? null : onLoginWithGoogle,
+                ),
                 const SizedBox(height: AppSpace.lg),
                 AppButton.text(
                   label: l10n.registerGoToLoginButton,
@@ -173,6 +183,39 @@ class RegisterForm extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _DividerLabel extends StatelessWidget {
+  const _DividerLabel({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final dividerColor = Color.lerp(
+      context.colors.onSurface,
+      context.colors.surface,
+      AppOpacity.inputFillDark,
+    );
+
+    return Row(
+      children: [
+        Expanded(child: Divider(color: dividerColor)),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpace.lg),
+          child: AppText.bodySmall(
+            label,
+            color: Color.lerp(
+              context.colors.onSurface,
+              context.colors.surface,
+              AppOpacity.mutedText,
+            ),
+          ),
+        ),
+        Expanded(child: Divider(color: dividerColor)),
+      ],
     );
   }
 }

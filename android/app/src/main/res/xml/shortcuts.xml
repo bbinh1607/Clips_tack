@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutDisabledMessage="@string/shortcut_create_long"
+        android:shortcutId="create_clip"
+        android:shortcutLongLabel="@string/shortcut_create_long"
+        android:shortcutShortLabel="@string/shortcut_create_short">
+        <intent
+            android:action="com.example.clips_tack.action.CREATE_CLIP"
+            android:targetClass="com.example.clips_tack.MainActivity"
+            android:targetPackage="com.example.clips_tack" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutDisabledMessage="@string/shortcut_search_long"
+        android:shortcutId="search_clips"
+        android:shortcutLongLabel="@string/shortcut_search_long"
+        android:shortcutShortLabel="@string/shortcut_search_short">
+        <intent
+            android:action="com.example.clips_tack.action.SEARCH_CLIPS"
+            android:targetClass="com.example.clips_tack.MainActivity"
+            android:targetPackage="com.example.clips_tack" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutDisabledMessage="@string/shortcut_pinned_long"
+        android:shortcutId="open_pinned"
+        android:shortcutLongLabel="@string/shortcut_pinned_long"
+        android:shortcutShortLabel="@string/shortcut_pinned_short">
+        <intent
+            android:action="com.example.clips_tack.action.OPEN_PINNED"
+            android:targetClass="com.example.clips_tack.MainActivity"
+            android:targetPackage="com.example.clips_tack" />
+    </shortcut>
+</shortcuts>

@@ -91,6 +91,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteAction => 'Delete';
 
   @override
+  String get moreActionsTooltip => 'More actions';
+
+  @override
   String get deletedMessage => 'Deleted';
 
   @override
@@ -298,7 +301,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginForgotPasswordButton => 'Forgot password?';
 
   @override
-  String get loginButton => 'Sign in with Gmail';
+  String get loginButton => 'Sign in';
 
   @override
   String get loginLoadingButton => 'Signing in...';
@@ -366,7 +369,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerPasswordsDoNotMatch => 'Passwords do not match';
 
   @override
-  String get registerButton => 'Register with Gmail';
+  String get registerButton => 'Create account';
 
   @override
   String get registerLoadingButton => 'Creating account...';

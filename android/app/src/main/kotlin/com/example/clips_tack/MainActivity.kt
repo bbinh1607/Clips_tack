@@ -3,6 +3,7 @@ package com.example.clips_tack
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
 import io.flutter.embedding.engine.FlutterEngine
@@ -10,6 +11,20 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
+    private var shortcutChannel: MethodChannel? = null
+    private var pendingShortcutAction: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        pendingShortcutAction = shortcutActionFromIntent(intent)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleShortcutIntent(intent, dispatchToFlutter = true)
+    }
+
     override fun onResume() {
         super.onResume()
         startEnabledBubbleIfNeeded()
@@ -34,6 +49,44 @@ class MainActivity : FlutterActivity() {
                     else -> result.notImplemented()
                 }
             }
+
+        shortcutChannel = MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
+            MOBILE_SHORTCUT_CHANNEL
+        )
+        shortcutChannel?.setMethodCallHandler { call, result ->
+            when (call.method) {
+                "getInitialAction" -> result.success(pendingShortcutAction)
+                "clearInitialAction" -> {
+                    pendingShortcutAction = null
+                    result.success(null)
+                }
+                "updateWidgets" -> {
+                    ClipStackWidgetProvider.updateAll(this)
+                    result.success(true)
+                }
+                else -> result.notImplemented()
+            }
+        }
+    }
+
+    private fun handleShortcutIntent(intent: Intent?, dispatchToFlutter: Boolean) {
+        val action = shortcutActionFromIntent(intent) ?: return
+        pendingShortcutAction = action
+
+        if (dispatchToFlutter) {
+            shortcutChannel?.invokeMethod("onShortcutAction", action)
+        }
+    }
+
+    private fun shortcutActionFromIntent(intent: Intent?): String? {
+        return when (intent?.action) {
+            ACTION_CREATE_CLIP -> FLUTTER_ACTION_CREATE_CLIP
+            ACTION_SEARCH_CLIPS -> FLUTTER_ACTION_SEARCH_CLIPS
+            ACTION_OPEN_PINNED -> FLUTTER_ACTION_OPEN_PINNED
+            ACTION_OPEN_HOME -> FLUTTER_ACTION_OPEN_HOME
+            else -> null
+        }
     }
 
     private fun hasOverlayPermission(): Boolean {
@@ -83,7 +136,18 @@ class MainActivity : FlutterActivity() {
 
     companion object {
         private const val OVERLAY_CHANNEL = "clips_tack/overlay"
+        private const val MOBILE_SHORTCUT_CHANNEL = "clips_tack/mobile_shortcuts"
         private const val FLUTTER_PREFS_NAME = "FlutterSharedPreferences"
         private const val OVERLAY_BUBBLE_ENABLED_KEY = "flutter.overlay_bubble_enabled"
+
+        const val ACTION_CREATE_CLIP = "com.example.clips_tack.action.CREATE_CLIP"
+        const val ACTION_SEARCH_CLIPS = "com.example.clips_tack.action.SEARCH_CLIPS"
+        const val ACTION_OPEN_PINNED = "com.example.clips_tack.action.OPEN_PINNED"
+        const val ACTION_OPEN_HOME = "com.example.clips_tack.action.OPEN_HOME"
+
+        private const val FLUTTER_ACTION_CREATE_CLIP = "create_clip"
+        private const val FLUTTER_ACTION_SEARCH_CLIPS = "search_clips"
+        private const val FLUTTER_ACTION_OPEN_PINNED = "open_pinned"
+        private const val FLUTTER_ACTION_OPEN_HOME = "open_home"
     }
 }

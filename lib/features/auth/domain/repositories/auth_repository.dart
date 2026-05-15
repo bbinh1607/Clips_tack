@@ -13,4 +13,5 @@ abstract class AuthRepository {
   });
   DataState<void> logout();
   DataState<bool> isLoggedIn();
+  DataState<UserEntity?> currentUser();
 }

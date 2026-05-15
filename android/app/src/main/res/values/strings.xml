@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClipStack</string>
+    <string name="shortcut_create_short">Tao clip</string>
+    <string name="shortcut_create_long">Tao clip moi</string>
+    <string name="shortcut_search_short">Tim clip</string>
+    <string name="shortcut_search_long">Tim trong clipboard</string>
+    <string name="shortcut_pinned_short">Da ghim</string>
+    <string name="shortcut_pinned_long">Mo clip da ghim</string>
+    <string name="widget_empty_content">Chua co clip nao</string>
+    <string name="widget_latest_meta">Clip gan nhat</string>
+    <string name="widget_pinned_meta">Clip da ghim</string>
+    <string name="widget_copied_message">Da sao chep clip</string>
+    <string name="widget_new_button">Moi</string>
+    <string name="widget_copy_button">Copy</string>
+    <string name="widget_pinned_button">Ghim</string>
+</resources>

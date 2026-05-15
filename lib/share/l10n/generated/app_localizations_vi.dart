@@ -91,6 +91,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get deleteAction => 'Xóa';
 
   @override
+  String get moreActionsTooltip => 'Tác vụ khác';
+
+  @override
   String get deletedMessage => 'Đã xóa';
 
   @override
@@ -299,7 +302,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get loginForgotPasswordButton => 'Quên mật khẩu?';
 
   @override
-  String get loginButton => 'Đăng nhập bằng Gmail';
+  String get loginButton => 'Đăng nhập';
 
   @override
   String get loginLoadingButton => 'Đang đăng nhập...';
@@ -366,7 +369,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get registerPasswordsDoNotMatch => 'Mật khẩu không khớp';
 
   @override
-  String get registerButton => 'Đăng ký bằng Gmail';
+  String get registerButton => 'Tạo tài khoản';
 
   @override
   String get registerLoadingButton => 'Đang tạo tài khoản...';

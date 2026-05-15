@@ -65,6 +65,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
+  void _loginWithGoogle() {
+    context.hideKeyboard();
+    context.read<AuthBloc>().add(const AuthEvent.loginWithGoogle());
+  }
+
   void _goToLogin() {
     context.goNamed(AppRoutes.login);
   }
@@ -200,6 +205,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       obscureConfirmPassword: _obscureConfirmPassword,
                       isLoading: isLoading,
                       onRegister: _register,
+                      onLoginWithGoogle: _loginWithGoogle,
                       onLogin: _goToLogin,
                       onTogglePasswordVisibility: _togglePasswordVisibility,
                       onToggleConfirmPasswordVisibility:

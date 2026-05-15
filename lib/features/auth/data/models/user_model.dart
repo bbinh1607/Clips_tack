@@ -34,7 +34,6 @@ abstract class UserModel with _$UserModel {
       name: user.displayName,
       avatarUrl: user.photoURL,
       username: user.displayName,
-      password: user.password,
     );
   }
 

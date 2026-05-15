@@ -93,9 +93,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onCheckLogin(_CheckLogin event, Emitter<AuthState> emit) async {
     final result = await _checkLoginUseCase();
 
-    result.fold((_) => emit(const AuthState.unauthenticated()), (isLoggedIn) {
-      if (isLoggedIn) {
-        emit(const AuthState.authenticated());
+    result.fold((_) => emit(const AuthState.unauthenticated()), (user) {
+      if (user != null) {
+        emit(AuthState.authenticated(user: user));
       } else {
         emit(const AuthState.unauthenticated());
       }

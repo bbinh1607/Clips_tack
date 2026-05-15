@@ -1,12 +1,22 @@
-import 'package:clips_tack/features/clipboard/data/services/clipboard_service.dart';
-import 'package:clips_tack/features/clipboard/models/clipboard_item.dart';
+import 'package:clips_tack/features/clipboard/domain/entities/clipboard_item.dart';
+import 'package:clips_tack/features/clipboard/domain/repositories/clipboard_repository.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/add_clipboard_item.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/clipboard_usecases.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/delete_clipboard_item.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/load_clipboard_items.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/read_clipboard_text.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/save_clipboard_items.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/sort_clipboard_items.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/toggle_clipboard_pin.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/update_clipboard_item.dart';
+import 'package:clips_tack/features/clipboard/domain/usecases/write_clipboard_text.dart';
 import 'package:clips_tack/features/clipboard/presentation/bloc/clipboard_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('pins clips to the top and rejects duplicates', () async {
     final bloc = ClipboardBloc(
-      clipboardService: _FakeClipboardService(),
+      useCases: _buildUseCases(_FakeClipboardRepository()),
       enableClipboardTracking: false,
     );
     addTearDown(bloc.close);
@@ -28,7 +38,7 @@ void main() {
 
   test('editing rejects duplicate content from another clip', () async {
     final bloc = ClipboardBloc(
-      clipboardService: _FakeClipboardService(),
+      useCases: _buildUseCases(_FakeClipboardRepository()),
       enableClipboardTracking: false,
     );
     addTearDown(bloc.close);
@@ -47,16 +57,31 @@ void main() {
   });
 }
 
-class _FakeClipboardService implements ClipboardService {
+ClipboardUseCases _buildUseCases(ClipboardRepository repository) {
+  final sortItems = SortClipboardItems();
+
+  return ClipboardUseCases(
+    LoadClipboardItems(repository, sortItems),
+    SaveClipboardItems(repository),
+    ReadClipboardText(repository),
+    WriteClipboardText(repository),
+    AddClipboardItem(sortItems),
+    UpdateClipboardItem(sortItems),
+    ToggleClipboardPin(sortItems),
+    const DeleteClipboardItem(),
+  );
+}
+
+class _FakeClipboardRepository implements ClipboardRepository {
   @override
-  Future<String?> readText() async => null;
+  Future<String?> readClipboardText() async => null;
 
   @override
-  Future<void> writeText(String text) async {}
+  Future<void> writeClipboardText(String text) async {}
 
   @override
-  Future<List<ClipboardItem>> loadLocal() async => <ClipboardItem>[];
+  Future<List<ClipboardItem>> loadItems() async => <ClipboardItem>[];
 
   @override
-  Future<void> saveLocal(List<ClipboardItem> items) async {}
+  Future<void> saveItems(List<ClipboardItem> items) async {}
 }
